@@ -1,0 +1,20 @@
+{
+    "order_book_now": "Order Your Book Now!",
+    "login": "login",
+    "auth_register": "Register",
+    "auth_welcome_back": "Welcome back! Glad to see you again!",
+    "auth_enter_email": "Enter your email",
+    "auth_enter_password": "Enter your password",
+    "auth_forgot_password": "Forgot Password?",
+    "auth_sign_in_with_google": "Sign in with Google",
+    "auth_sign_in_with_apple": "Sign in with Apple",
+    "auth_no_account": "Don’t have an account?",
+    "auth_register_now": "Register Now",
+    "auth_register_greeting": "Hello! Register to get started",
+    "auth_username": "Username",
+    "auth_email": "Email",
+    "auth_password": "Password",
+    "auth_confirm_password": "Confirm password",
+    "auth_already_have_account": "Already have an account?",
+    "auth_login_now": "Login Now"
+}
