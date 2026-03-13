@@ -37,6 +37,11 @@ dependencies:
   flutter_gen: ^5.12.0
   flutter_screenutil: ^5.9.3
   easy_localization: ^3.0.8
+  flutter_svg: ^2.2.4
+  dio: ^5.9.2
+  get_it: ^9.2.1
+  bloc: ^9.2.0
+  flutter_bloc: ^9.1.1
 
 
 
