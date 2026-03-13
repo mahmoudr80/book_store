@@ -21,5 +21,33 @@ abstract class  LocaleKeys {
   static const auth_email = 'auth_email';
   static const auth_username = 'auth_username';
   static const auth_register_greeting = 'auth_register_greeting';
+  static const email_required = 'email_required';
+  static const invalid_email_format = 'invalid_email_format';
+  static const password_required = 'password_required';
+  static const password_min_length = 'password_min_length';
+  static const confirm_password_required = 'confirm_password_required';
+  static const passwords_do_not_match = 'passwords_do_not_match';
+  static const username_required = 'username_required';
+  static const registered_successfully = 'registered_successfully';
+  static const invalid_registration = 'invalid_registration';
+  static const login_successfully = 'login_successfully';
+  static const invalid_credential = 'invalid_credential';
+  static const Forgot_Password = 'Forgot_Password';
+  static const message_forget_password = 'message_forget_password';
+  static const button = 'button';
+  static const Remember_Password = 'Remember_Password';
+  static const otp_verification = 'otp_verification';
+  static const message_verification = 'message_verification';
+  static const verify_button = 'verify_button';
+  static const no_code = 'no_code';
+  static const resend = 'resend';
+  static const title_create_password = 'title_create_password';
+  static const description_new_password = 'description_new_password';
+  static const new_password_label = 'new_password_label';
+  static const confirm_password_label = 'confirm_password_label';
+  static const reset_password_button = 'reset_password_button';
+  static const title_password_changed = 'title_password_changed';
+  static const password_changed_successfully = 'password_changed_successfully';
+  static const back_to_login_button = 'back_to_login_button';
 
 }

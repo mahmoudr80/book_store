@@ -10,7 +10,7 @@ final String title ;
   Widget build(BuildContext context) {
     return Container(
       padding: EdgeInsets.symmetric(vertical: 15.h),
-      decoration: BoxDecoration(borderRadius: BorderRadius.circular(8.r),border: Border.all(color: AppColor.primaryTextFormBorderColor)),
+      decoration: BoxDecoration(borderRadius: BorderRadius.circular(8.r),border: Border.all(color: AppColor.borderColor)),
       child: Row(mainAxisAlignment: MainAxisAlignment.center,children: [image,SizedBox(width:4.w ,),Text(title)],),
     );
   }
