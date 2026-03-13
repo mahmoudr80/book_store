@@ -1,3 +1,4 @@
+import 'package:book_store/feature/auth/data/models/user_model.dart';
 import 'package:book_store/feature/auth/presentation/screens/forget_password_screen.dart';
 import 'package:book_store/feature/auth/presentation/screens/login_screen.dart';
 import 'package:book_store/feature/auth/presentation/screens/register_screen.dart';
@@ -16,7 +17,8 @@ abstract class RoutesScreens {
 Route<dynamic>? generateRoutes(RouteSettings route){
 switch(route.name){
   case RoutesScreens.homeScreen:
-    return MaterialPageRoute(builder: (context) => HomeScreen(),);
+    final user = route.arguments as UserModel;
+    return MaterialPageRoute(builder: (context) => HomeScreen(user:user),);
   case RoutesScreens.registerScreen:
     return MaterialPageRoute(builder: (context) => RegisterScreen(),);
   case RoutesScreens.loginScreen:

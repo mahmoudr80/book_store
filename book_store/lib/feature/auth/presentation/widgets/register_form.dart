@@ -7,16 +7,19 @@ import '../../../../core/widgets/custom_text_form_field.dart';
 import '../../../../gen/translations/local_keys.g.dart';
 
 class RegisterForm extends StatelessWidget {
-  const RegisterForm({super.key, required this.usernameController, required this.emailController, required this.passController, required this.confirmPassController});
+  const RegisterForm({super.key, required this.usernameController,
+    required this.emailController, required this.passController,
+    required this.confirmPassController, required this.formKey});
 final TextEditingController usernameController;
 final TextEditingController emailController;
 final TextEditingController passController;
 final TextEditingController confirmPassController;
+final GlobalKey<FormState>formKey;
   @override
   Widget build(BuildContext context) {
     return Form(
       autovalidateMode: AutovalidateMode.onUnfocus,
-      key: key,
+      key: formKey,
       child: Column(
         spacing: 11.h,
         children: [

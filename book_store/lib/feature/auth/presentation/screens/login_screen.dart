@@ -60,7 +60,7 @@ class _LoginScreenState extends State<LoginScreen> {
                   ),
                 ),
                 Spacer(flex: 4),
-                LoginForm(emailController: emailController, passController: passController,),
+                LoginForm(emailController: emailController, passController: passController,formKey: key,),
                 Spacer(flex: 1),
                 Row(mainAxisAlignment: MainAxisAlignment.end,
                   children: [

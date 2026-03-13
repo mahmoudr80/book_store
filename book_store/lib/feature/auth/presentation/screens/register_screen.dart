@@ -65,6 +65,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                   emailController: emailController,
                   passController: passController,
                   confirmPassController: confirmPassController,
+                  formKey: key,
                 ),
                 Spacer(flex: 3),
                 BlocConsumer<RegisterCubit, RegisterState>(

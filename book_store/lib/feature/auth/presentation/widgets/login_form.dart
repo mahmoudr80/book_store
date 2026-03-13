@@ -7,13 +7,15 @@ import '../../../../core/widgets/custom_text_form_field.dart';
 import '../../../../gen/translations/local_keys.g.dart';
 
 class LoginForm extends StatelessWidget {
-  const LoginForm({super.key, required this.emailController, required this.passController});
+  const LoginForm({super.key, required this.emailController,
+    required this.passController, required this.formKey});
 final TextEditingController emailController;
 final TextEditingController passController;
+final GlobalKey<FormState>formKey;
   @override
   Widget build(BuildContext context) {
     return Form(
-      key: key,
+      key: formKey,
       autovalidateMode: AutovalidateMode.onUnfocus,
       child: Column(
         children: [
