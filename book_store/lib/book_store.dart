@@ -7,6 +7,10 @@ import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart' ;
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
+import 'core/helper/app_constants.dart';
+import 'feature/auth/data/models/user_model.dart';
+import 'feature/home/home_screen.dart';
+
 class BookStore extends StatelessWidget {
   const BookStore({super.key});
 
@@ -27,9 +31,18 @@ class BookStore extends StatelessWidget {
         supportedLocales: context.supportedLocales,
         locale: context.locale,
 
-        home: WelcomeScreen(),
+        home: startScreen(),
       ),
     );
   }
+  Widget startScreen(){
+    if(AppConstants.token!=null){
+      return WelcomeScreen();
+    }
+    else{
+      return HomeScreen(user: UserModel(name: 'name', email: 'email'));
+    }
+  }
+
 }
 ///look at it extenstion in dart & onGenerateRoute

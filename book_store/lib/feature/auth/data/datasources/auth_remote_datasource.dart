@@ -1,23 +1,45 @@
-
-import 'package:book_store/core/network/api_client.dart';
+import 'package:book_store/core/network/api_constants.dart';
+import 'package:book_store/core/network/api_helper.dart';
+import 'package:book_store/core/network/api_result.dart';
 import 'package:book_store/feature/auth/data/models/user_model.dart';
 
 class AuthRemoteDatasource {
-final ApiClient client;
+final ApiHelper _helper;
 
-AuthRemoteDatasource(this.client);
+const AuthRemoteDatasource(this._helper);
+
 
 Future<UserModel> login(Map<String,dynamic>json) async {
 
-  final data = await client.login(json);
-  final user =UserModel.fromJson(data["data"]["user"]);
-  return user;
+  final response = await _helper.post(ApiConstants.loginEndPoint,data: json);
+  if(response is Success){
+    final user =UserModel.fromJson(response.data["data"]["user"]);
+    return user;
+
+  }
+  else if(response is Failure){
+    throw response.errorModel.error.toString();
+  }
+  else{
+    throw "Unexpected error";
+  }
 }
 
 Future<UserModel> register(Map<String,dynamic>json) async {
 
-  final data = await client.register(json);
-  final user =UserModel.fromJson(data["data"]["user"]);
-  return user;
+
+  final response = await _helper.post(ApiConstants.registerEndPoint,data: json);
+  if(response is Success){
+    final user =UserModel.fromJson(response.data["data"]["user"]);
+    return user;
+  }
+  else if(response is Failure){
+    throw Exception(response.errorModel.error);
+  }
+  else{
+    throw Exception("Unexpected error");
+  }
+
 }
+
 }

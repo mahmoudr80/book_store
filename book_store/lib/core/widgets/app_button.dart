@@ -5,8 +5,11 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class AppButton extends StatelessWidget {
   const AppButton({super.key, this.backColor, required this.label, this.tapped});
-final Color ?backColor;
+  ///background button color
+  final Color ?backColor;
+  ///label of button
 final String label;
+  ///call back function on tapped on button
 final void Function()?tapped;
   @override
   Widget build(BuildContext context) {

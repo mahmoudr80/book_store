@@ -22,6 +22,7 @@ final GlobalKey<FormState>formKey;
           CustomTextFormField(
             hintText: LocaleKeys.auth_enter_email.tr(),
             controller: emailController,
+            keyboardType:TextInputType.emailAddress ,
             validators: (email) =>
                 AuthValidators.validateEmail(email),
           ),

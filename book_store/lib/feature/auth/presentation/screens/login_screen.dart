@@ -2,6 +2,7 @@ import 'package:book_store/core/routes/routes_screens.dart';
 import 'package:book_store/core/utils/app_snackBar.dart';
 import 'package:book_store/core/widgets/app_button.dart';
 import 'package:book_store/core/widgets/customTextRich.dart';
+import 'package:book_store/feature/auth/data/repository/auth_repositoryImp.dart';
 import 'package:book_store/feature/auth/presentation/cubit/login_cubit.dart';
 import 'package:book_store/feature/auth/presentation/widgets/login_form.dart';
 import 'package:book_store/feature/auth/presentation/widgets/sign_in_widget.dart';
@@ -11,8 +12,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import '../../../../core/dependency_injection/service_locator.dart';
+import '../../../../core/theme/app_color.dart';
 import '../../../../core/widgets/custom_back_button.dart';
-import '../../domain/usecases/login_usecase.dart';
 
 class LoginScreen extends StatefulWidget {
   const LoginScreen({super.key});
@@ -35,7 +36,7 @@ class _LoginScreenState extends State<LoginScreen> {
   @override
   Widget build(BuildContext context) {
     return BlocProvider(
-      create: (context) => LoginCubit(getIt<LoginUseCase>()),
+      create: (context) => LoginCubit(getIt<AuthRepository>()),
       child: Scaffold(
         appBar: AppBar(
           leadingWidth: 60.w,
@@ -60,7 +61,8 @@ class _LoginScreenState extends State<LoginScreen> {
                   ),
                 ),
                 Spacer(flex: 4),
-                LoginForm(emailController: emailController, passController: passController,formKey: key,),
+                LoginForm(emailController: emailController,
+                  passController: passController,formKey: key,),
                 Spacer(flex: 1),
                 Row(mainAxisAlignment: MainAxisAlignment.end,
                   children: [
@@ -74,6 +76,7 @@ class _LoginScreenState extends State<LoginScreen> {
                 BlocConsumer<LoginCubit, LoginState>(
                   listener: (context, state) {
                     if (state is LoginFailed) {
+                      Navigator.pop(context);
                       AppSnackbar.showError(context, state.errMessage);
                     } else if (state is LoginSuccess) {
                       AppSnackbar.showSuccess(
@@ -86,23 +89,31 @@ class _LoginScreenState extends State<LoginScreen> {
                         arguments: state.user,
                       );
                     }
+                    else if (state is LoginLoading) {
+                    showDialog(context: context,
+                        builder:(context) => Center(child: CircularProgressIndicator(color: AppColor.primaryColor,),),);
+                    }
                   },
-                  builder: (context, state) => AppButton(
-                    label: LocaleKeys.login.tr(),
-                    tapped: () {
-                      if (key.currentState?.validate() ?? false) {
-                        context.read<LoginCubit>().login(
-                          emailController.text,
-                          passController.text,
-                        );
-                      } else {
-                        AppSnackbar.showError(
-                          context,
-                          LocaleKeys.invalid_credential.tr(),
-                        );
-                      }
-                    },
-                  ),
+                  builder: (context, state)
+                    {
+                    return  AppButton(
+                        label: LocaleKeys.login.tr(),
+                        tapped: () {
+                          if (key.currentState?.validate() ?? false) {
+                            context.read<LoginCubit>().login(
+                              emailController.text,
+                              passController.text,
+                            );
+                          } else {
+                            AppSnackbar.showError(
+                              context,
+                              LocaleKeys.invalid_credential.tr(),
+                            );
+                          }
+                        },
+                      );
+                    }
+
                 ),
                 Spacer(flex: 4),
                 SizedBox(width: 331.w, height: 167.h, child: SignInWidget()),
