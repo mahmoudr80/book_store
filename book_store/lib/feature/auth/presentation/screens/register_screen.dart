@@ -2,7 +2,7 @@ import 'package:book_store/core/dependency_injection/service_locator.dart';
 import 'package:book_store/core/routes/routes_screens.dart';
 import 'package:book_store/core/widgets/customTextRich.dart';
 import 'package:book_store/feature/auth/data/models/user_model.dart';
-import 'package:book_store/feature/auth/domain/usecases/register_usecase.dart';
+import 'package:book_store/feature/auth/data/repository/auth_repositoryImp.dart';
 import 'package:book_store/feature/auth/presentation/cubit/register_cubit.dart';
 import 'package:book_store/feature/auth/presentation/widgets/register_form.dart';
 import 'package:book_store/gen/translations/local_keys.g.dart';
@@ -40,7 +40,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
   @override
   Widget build(BuildContext context) {
     return BlocProvider(
-      create: (context) => RegisterCubit(getIt<RegisterUseCase>()),
+      create: (context) => RegisterCubit(getIt<AuthRepository>()),
       child: Scaffold(
         appBar: AppBar(
           leading: CustomBackButton(tapped: () => Navigator.pop(context)),

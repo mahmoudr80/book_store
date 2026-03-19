@@ -18,15 +18,15 @@ Route<dynamic>? generateRoutes(RouteSettings route){
 switch(route.name){
   case RoutesScreens.homeScreen:
     final user = route.arguments as UserModel;
-    return MaterialPageRoute(builder: (context) => HomeScreen(user:user),);
+    return MaterialPageRoute(builder: (_) => HomeScreen(user:user),);
   case RoutesScreens.registerScreen:
-    return MaterialPageRoute(builder: (context) => RegisterScreen(),);
+    return MaterialPageRoute(builder: (_) => RegisterScreen(),);
   case RoutesScreens.loginScreen:
-    return MaterialPageRoute(builder: (context) => LoginScreen(),);
+    return MaterialPageRoute(builder: (_) => LoginScreen(),);
   case RoutesScreens.forgetPasswordScreen:
-    return MaterialPageRoute(builder: (context) => ForgetPasswordScreen(),);
+    return MaterialPageRoute(builder: (_) => ForgetPasswordScreen(),);
   case RoutesScreens.welcomeScreen:
-    return MaterialPageRoute(builder: (context) => WelcomeScreen(),);
+    return MaterialPageRoute(builder: (_) => WelcomeScreen(),);
   default :
     return null;
 }
