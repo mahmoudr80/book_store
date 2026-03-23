@@ -2,8 +2,8 @@ import 'package:book_store/core/routes/routes_screens.dart';
 import 'package:book_store/core/utils/app_snackBar.dart';
 import 'package:book_store/core/widgets/app_button.dart';
 import 'package:book_store/core/widgets/customTextRich.dart';
-import 'package:book_store/feature/auth/data/repository/auth_repositoryImp.dart';
-import 'package:book_store/feature/auth/presentation/cubit/login_cubit.dart';
+import 'package:book_store/feature/auth/data/repository/auth_repository.dart';
+import 'package:book_store/feature/auth/presentation/cubit/authentication_cubit.dart';
 import 'package:book_store/feature/auth/presentation/widgets/login_form.dart';
 import 'package:book_store/feature/auth/presentation/widgets/sign_in_widget.dart';
 import 'package:book_store/gen/translations/local_keys.g.dart';
@@ -36,7 +36,7 @@ class _LoginScreenState extends State<LoginScreen> {
   @override
   Widget build(BuildContext context) {
     return BlocProvider(
-      create: (context) => LoginCubit(getIt<AuthRepository>()),
+      create: (context) => AuthenticationCubit(getIt<AuthRepository>()),
       child: Scaffold(
         appBar: AppBar(
           leadingWidth: 60.w,
@@ -73,12 +73,12 @@ class _LoginScreenState extends State<LoginScreen> {
                   ],
                 ),
                 Spacer(flex: 4),
-                BlocConsumer<LoginCubit, LoginState>(
+                BlocConsumer<AuthenticationCubit,AuthenticationState>(
                   listener: (context, state) {
-                    if (state is LoginFailed) {
+                    if (state.enCurrentAction==EnAction.login&&state.enCurrentStatus==EnStatus.fail) {
                       Navigator.pop(context);
-                      AppSnackbar.showError(context, state.errMessage);
-                    } else if (state is LoginSuccess) {
+                      AppSnackbar.showError(context, state.errorMessage!);
+                    } else if (state.enCurrentAction==EnAction.login&&state.enCurrentStatus==EnStatus.success) {
                       AppSnackbar.showSuccess(
                         context,
                         LocaleKeys.login_successfully.tr(),
@@ -86,10 +86,10 @@ class _LoginScreenState extends State<LoginScreen> {
                       Navigator.pushNamed(
                         context,
                         RoutesScreens.homeScreen,
-                        arguments: state.user,
+                        arguments: state.currentUser,
                       );
                     }
-                    else if (state is LoginLoading) {
+                    else if (state.enCurrentAction==EnAction.login&&state.enCurrentStatus==EnStatus.loading) {
                     showDialog(context: context,
                         builder:(context) => Center(child: CircularProgressIndicator(color: AppColor.primaryColor,),),);
                     }
@@ -100,7 +100,7 @@ class _LoginScreenState extends State<LoginScreen> {
                         label: LocaleKeys.login.tr(),
                         tapped: () {
                           if (key.currentState?.validate() ?? false) {
-                            context.read<LoginCubit>().login(
+                            context.read<AuthenticationCubit>().login(
                               emailController.text,
                               passController.text,
                             );

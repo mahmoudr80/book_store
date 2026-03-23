@@ -1,9 +1,15 @@
 import 'package:book_store/core/network/api_helper.dart';
 import 'package:book_store/core/network/dio_factory.dart';
 import 'package:book_store/feature/auth/data/datasources/auth_remote_datasource.dart';
-import 'package:book_store/feature/auth/data/repository/auth_repositoryImp.dart';
+import 'package:book_store/feature/auth/data/repository/auth_repository.dart';
 import 'package:dio/dio.dart';
+import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:get_it/get_it.dart';
+import 'package:shared_preferences/shared_preferences.dart';
+
+import '../session/session_manager.dart';
+import '../storage/local_storage_service.dart';
+import '../storage/secure_storage_service.dart';
 
 // Create a global instance (or use GetIt.instance)
 final getIt = GetIt.instance;
@@ -13,7 +19,12 @@ void configureDependencies(){
   getIt.registerLazySingleton<Dio>(() => DioFactory.createDio(),);
   getIt.registerLazySingleton<ApiHelper>(() => ApiHelper(getIt<Dio>()),);
   getIt.registerLazySingleton<AuthRemoteDatasource>(() => AuthRemoteDatasource(getIt<ApiHelper>()),);
-  getIt.registerLazySingleton<AuthRepository>(() => AuthRepository(getIt<AuthRemoteDatasource>()),);
+  getIt.registerLazySingleton<AuthRepository>(() => AuthRepository(getIt<AuthRemoteDatasource>(),getIt<SessionManager>()),);
+  getIt.registerLazySingleton<FlutterSecureStorage>(() => FlutterSecureStorage(),);
+  getIt.registerSingletonAsync<SharedPreferences>(() async =>await SharedPreferences.getInstance(),);
+  getIt.registerLazySingleton<LocalStorageService>(() =>LocalStorageService( getIt<SharedPreferences>()),);
+  getIt.registerLazySingleton<SecureStorageService>(()=>SecureStorageService(getIt<FlutterSecureStorage>()));
+  getIt.registerLazySingleton<SessionManager>(() => SessionManager(getIt<LocalStorageService>(), getIt<SecureStorageService>()));
 }
 
 // No BuildContext passing needed!

@@ -2,8 +2,8 @@ import 'package:book_store/core/dependency_injection/service_locator.dart';
 import 'package:book_store/core/routes/routes_screens.dart';
 import 'package:book_store/core/widgets/customTextRich.dart';
 import 'package:book_store/feature/auth/data/models/user_model.dart';
-import 'package:book_store/feature/auth/data/repository/auth_repositoryImp.dart';
-import 'package:book_store/feature/auth/presentation/cubit/register_cubit.dart';
+import 'package:book_store/feature/auth/data/repository/auth_repository.dart';
+import 'package:book_store/feature/auth/presentation/cubit/authentication_cubit.dart';
 import 'package:book_store/feature/auth/presentation/widgets/register_form.dart';
 import 'package:book_store/gen/translations/local_keys.g.dart';
 import 'package:easy_localization/easy_localization.dart';
@@ -40,7 +40,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
   @override
   Widget build(BuildContext context) {
     return BlocProvider(
-      create: (context) => RegisterCubit(getIt<AuthRepository>()),
+      create: (context) => AuthenticationCubit(getIt<AuthRepository>()),
       child: Scaffold(
         appBar: AppBar(
           leading: CustomBackButton(tapped: () => Navigator.pop(context)),
@@ -68,11 +68,11 @@ class _RegisterScreenState extends State<RegisterScreen> {
                   formKey: key,
                 ),
                 Spacer(flex: 3),
-                BlocConsumer<RegisterCubit, RegisterState>(
+                BlocConsumer<AuthenticationCubit,AuthenticationState>(
                   listener: (BuildContext context, state) {
-                    if (state is RegisterFailed) {
-                      AppSnackbar.showError(context, state.errMessage);
-                    } else if (state is RegisterSuccess) {
+                    if (state.enCurrentAction==EnAction.register&&state.enCurrentStatus==EnStatus.fail) {
+                      AppSnackbar.showError(context, state.errorMessage!);
+                    } else if (state.enCurrentAction==EnAction.register&&state.enCurrentStatus==EnStatus.success) {
                       AppSnackbar.showSuccess(
                         context,
                         LocaleKeys.registered_successfully.tr(),
@@ -80,7 +80,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                       Navigator.pushNamed(
                         context,
                         RoutesScreens.homeScreen,
-                        arguments: state.user,
+                        arguments: state.currentUser,
                       );
                     }
                   },
@@ -88,7 +88,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                     label: LocaleKeys.auth_register.tr(),
                     tapped: () {
                       if (key.currentState?.validate() ?? false) {
-                        context.read<RegisterCubit>().register(
+                        context.read<AuthenticationCubit>().register(
                           UserModel(name: usernameController.text, email: emailController.text, password: passController.text, password_confirmation: confirmPassController.text,),
                         );
                       } else {

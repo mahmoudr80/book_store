@@ -1,3 +1,4 @@
 class AppConstants {
-  static String ? token;
+  static const String tokenSecureStorageKey ="token_key" ;
+  static const String userSharedPrefKey ="token_key" ;
 }
