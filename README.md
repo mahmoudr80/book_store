@@ -37,6 +37,8 @@ Screenshots / Demo:
 Installation / Run Instructions:
 
 Clone the repository
+-
 Run flutter pub get
+-
 Launch the app using flutter run
-- 
+-
