@@ -1,4 +1,10 @@
+import 'dart:convert';
+
+import 'package:book_store/core/dependency_injection/service_locator.dart';
 import 'package:book_store/core/routes/routes_screens.dart';
+import 'package:book_store/core/session/session_manager.dart';
+import 'package:book_store/core/storage/local_storage_service.dart';
+import 'package:book_store/core/storage/secure_storage_service.dart';
 import 'package:book_store/feature/auth/presentation/screens/create_new_password_screen.dart';
 import 'package:book_store/feature/auth/presentation/screens/otp_verification_screen.dart';
 import 'package:book_store/feature/auth/presentation/screens/password_changed_screen.dart';
@@ -6,6 +12,8 @@ import 'package:book_store/feature/welcome/presentation/welcome_screen.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart' ;
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:flutter_secure_storage/flutter_secure_storage.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 import 'core/helper/app_constants.dart';
 import 'feature/auth/data/models/user_model.dart';
@@ -31,17 +39,40 @@ class BookStore extends StatelessWidget {
         supportedLocales: context.supportedLocales,
         locale: context.locale,
 
-        home: startScreen(),
+        home: FutureBuilder(future: startScreen(),
+            builder:(context, snapshot) {
+              if(snapshot.connectionState==ConnectionState.waiting){
+                return const Scaffold(
+                  body: Center(child: CircularProgressIndicator()),
+                );
+              }
+              if(snapshot.hasError){
+                return const Scaffold(
+                  body: Center(child: Text('Something went wrong')),
+                );
+              }
+              return snapshot.data!;
+            },),
       ),
     );
   }
-  Widget startScreen(){
-    if(AppConstants.token!=null){
-      return WelcomeScreen();
+  Future<Widget> startScreen() async {
+    
+    SessionManager manager =getIt<SessionManager>();
+    String ? token = await manager.getToken();
+    String ?userJson = manager.getUser();
+    if(userJson!=null){
+      final user = UserModel.fromJson(jsonDecode( manager.getUser()!));
+      if( token== null){
+        return WelcomeScreen();
+      }
+      else{
+        return HomeScreen(user:user);
+      }
+    } else{
+      return HomeScreen(user:UserModel(name: 'name', email:' email'));
     }
-    else{
-      return HomeScreen(user: UserModel(name: 'name', email: 'email'));
-    }
+
   }
 
 }

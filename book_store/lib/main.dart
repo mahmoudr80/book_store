@@ -7,16 +7,13 @@ import 'core/dependency_injection/service_locator.dart';
 
 void main() async{
   WidgetsFlutterBinding.ensureInitialized();
-  final SharedPreferences prefs = await SharedPreferences.getInstance();
-  AppConstants.token= prefs.get("token").toString();
-  configureDependencies();
+   configureDependencies();
   await EasyLocalization.ensureInitialized();
   runApp(EasyLocalization(
       supportedLocales: [Locale('en'),Locale('ar')], path: 'assets/translations',
     fallbackLocale: Locale('en'),
     child: const BookStore(),
       ));
-
 
 
 }
