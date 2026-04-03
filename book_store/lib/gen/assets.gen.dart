@@ -11,6 +11,25 @@
 
 import 'package:flutter/widgets.dart';
 
+class $AssetsIconsGen {
+  const $AssetsIconsGen();
+
+  /// File path: assets/icons/Bookmark.svg
+  String get bookmark => 'assets/icons/Bookmark.svg';
+
+  /// File path: assets/icons/Group.svg
+  String get group => 'assets/icons/Group.svg';
+
+  /// File path: assets/icons/Home.svg
+  String get home => 'assets/icons/Home.svg';
+
+  /// File path: assets/icons/Profile.svg
+  String get profile => 'assets/icons/Profile.svg';
+
+  /// List of all assets
+  List<String> get values => [bookmark, group, home, profile];
+}
+
 class $AssetsImagesGen {
   const $AssetsImagesGen();
 
@@ -29,6 +48,9 @@ class $AssetsImagesGen {
   AssetGenImage get splashAndroid12 =>
       const AssetGenImage('assets/images/splashAndroid12.png');
 
+  /// File path: assets/images/verifiedIcon.svg
+  String get verifiedIcon => 'assets/images/verifiedIcon.svg';
+
   /// File path: assets/images/visibilityIcon.svg
   String get visibilityIcon => 'assets/images/visibilityIcon.svg';
 
@@ -42,6 +64,7 @@ class $AssetsImagesGen {
     googleIcon,
     splash,
     splashAndroid12,
+    verifiedIcon,
     visibilityIcon,
     welcomeBackground,
   ];
@@ -63,6 +86,7 @@ class $AssetsTranslationsGen {
 class Assets {
   const Assets._();
 
+  static const $AssetsIconsGen icons = $AssetsIconsGen();
   static const $AssetsImagesGen images = $AssetsImagesGen();
   static const $AssetsTranslationsGen translations = $AssetsTranslationsGen();
 }
