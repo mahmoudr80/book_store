@@ -1,5 +1,9 @@
 import 'package:book_store/book_store.dart';
 import 'package:book_store/core/helper/app_constants.dart';
+import 'package:book_store/core/network/api_constants.dart';
+import 'package:book_store/core/network/api_helper.dart';
+import 'package:book_store/feature/home/data/datasources/home_remote_datasource.dart';
+import 'package:book_store/feature/home/data/models/slider_model.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -14,7 +18,6 @@ void main() async{
     fallbackLocale: Locale('en'),
     child: const BookStore(),
       ));
-
 
 }
 

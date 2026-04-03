@@ -2,6 +2,8 @@ import 'package:book_store/core/network/api_helper.dart';
 import 'package:book_store/core/network/dio_factory.dart';
 import 'package:book_store/feature/auth/data/datasources/auth_remote_datasource.dart';
 import 'package:book_store/feature/auth/data/repository/auth_repository.dart';
+import 'package:book_store/feature/home/data/datasources/home_remote_datasource.dart';
+import 'package:book_store/feature/home/data/repository/home_repository.dart';
 import 'package:dio/dio.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:get_it/get_it.dart';
@@ -19,7 +21,9 @@ void configureDependencies(){
   getIt.registerLazySingleton<Dio>(() => DioFactory.createDio(),);
   getIt.registerLazySingleton<ApiHelper>(() => ApiHelper(getIt<Dio>()),);
   getIt.registerLazySingleton<AuthRemoteDatasource>(() => AuthRemoteDatasource(getIt<ApiHelper>()),);
+  getIt.registerLazySingleton<HomeRemoteDatasource>(() => HomeRemoteDatasource(getIt<ApiHelper>()),);
   getIt.registerLazySingleton<AuthRepository>(() => AuthRepository(getIt<AuthRemoteDatasource>(),getIt<SessionManager>()),);
+  getIt.registerLazySingleton<HomeRepository>(() => HomeRepository(getIt<HomeRemoteDatasource>()),);
   getIt.registerLazySingleton<FlutterSecureStorage>(() => FlutterSecureStorage(),);
   getIt.registerSingletonAsync<SharedPreferences>(() async =>await SharedPreferences.getInstance(),);
   getIt.registerLazySingleton<LocalStorageService>(() =>LocalStorageService( getIt<SharedPreferences>()),);
