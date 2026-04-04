@@ -33,6 +33,7 @@ Screenshots / Demo:
   <img src="https://github.com/user-attachments/assets/aecf635e-134b-43a9-b9d5-763b73c91979" width="24%" />
     <img  src="https://github.com/user-attachments/assets/c9c9ae24-c4eb-47cb-a2c9-b3dc004e74f3" width="24%" />
     <img src="https://github.com/user-attachments/assets/e9d90b07-8814-43c2-a172-d06ecc826a54" width="24%" />
+  <img src="https://github.com/user-attachments/assets/178b1427-020e-4190-ae70-bb1c6dccfa7f" width="24%" />
 </p>
 Installation / Run Instructions:
 
