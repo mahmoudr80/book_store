@@ -11,6 +11,16 @@
 
 import 'package:flutter/widgets.dart';
 
+class $AssetsAnimationsGen {
+  const $AssetsAnimationsGen();
+
+  /// File path: assets/animations/not_found_Json.json
+  String get notFoundJson => 'assets/animations/not_found_Json.json';
+
+  /// List of all assets
+  List<String> get values => [notFoundJson];
+}
+
 class $AssetsIconsGen {
   const $AssetsIconsGen();
 
@@ -26,8 +36,25 @@ class $AssetsIconsGen {
   /// File path: assets/icons/Profile.svg
   String get profile => 'assets/icons/Profile.svg';
 
+  /// File path: assets/icons/cameraIcon.svg
+  String get cameraIcon => 'assets/icons/cameraIcon.svg';
+
+  /// File path: assets/icons/cancel_Icon.svg
+  String get cancelIcon => 'assets/icons/cancel_Icon.svg';
+
+  /// File path: assets/icons/exit_Icon.svg
+  String get exitIcon => 'assets/icons/exit_Icon.svg';
+
   /// List of all assets
-  List<String> get values => [bookmark, group, home, profile];
+  List<String> get values => [
+    bookmark,
+    group,
+    home,
+    profile,
+    cameraIcon,
+    cancelIcon,
+    exitIcon,
+  ];
 }
 
 class $AssetsImagesGen {
@@ -86,6 +113,7 @@ class $AssetsTranslationsGen {
 class Assets {
   const Assets._();
 
+  static const $AssetsAnimationsGen animations = $AssetsAnimationsGen();
   static const $AssetsIconsGen icons = $AssetsIconsGen();
   static const $AssetsImagesGen images = $AssetsImagesGen();
   static const $AssetsTranslationsGen translations = $AssetsTranslationsGen();

@@ -11,13 +11,13 @@ class AuthRepository  {
  const AuthRepository(this._remoteDatasource,  this._manager);
 
 
-  Future<UserModel> login(String email, String password)async {
+  Future<AuthUserModel> login(String email, String password)async {
     final sessionModel = await _remoteDatasource.login({"email":email,"password":password});
     _manager.saveSession(sessionModel.token,jsonEncode(sessionModel.user.toJson()));
     return sessionModel.user;
   }
 
-  Future<UserModel> register(UserModel newUser) async {
+  Future<AuthUserModel> register(AuthUserModel newUser) async {
    final sessionModel = await _remoteDatasource.register(newUser.toJson());
    _manager.saveSession(sessionModel.token,jsonEncode(sessionModel.user.toJson()));
    return sessionModel.user;

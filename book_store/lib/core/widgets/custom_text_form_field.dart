@@ -15,15 +15,25 @@ class CustomTextFormField extends StatefulWidget {
     this.validators,
     this.maxLength,
     this.focusNode,
-    this.onChanged,
+    this.onChanged, this.hintStyle, this.prefixIcon, this.searchTapped, this.readOnly, this.suffixIcon, this.tapped,
   });
 
   /// controller is a TextEditingController
   final TextEditingController? controller;
   final String hintText;
 
+  final void Function(String)? searchTapped;
+
+  final TextStyle ?hintStyle;
+
   /// hide inputs in CustomTextFormField
   final bool secured;
+final  void Function()? tapped;
+  final Icon ?suffixIcon;
+
+  final bool ?readOnly;
+
+  final Widget ?prefixIcon;
 
   /// open a specific type of the keyboard (number,phone,text,etc...)
   final TextInputType keyboardType;
@@ -66,6 +76,9 @@ class _CustomTextFormFieldState extends State<CustomTextFormField> {
       borderSide: BorderSide(color: Colors.redAccent),
     );
     return TextFormField(
+      onTap: widget.tapped,
+      readOnly: widget.readOnly??false,
+      onFieldSubmitted: widget.searchTapped,
       onChanged: widget.onChanged,
       maxLength: widget.maxLength,
       focusNode: widget.focusNode,
@@ -79,7 +92,8 @@ class _CustomTextFormFieldState extends State<CustomTextFormField> {
       obscureText: widget.secured && obSecure,
       decoration: InputDecoration(
         counterText: "",
-        suffixIcon: widget.secured
+        suffixIcon:
+        widget.secured
             ? Padding(
                 padding: EdgeInsets.all(16.r),
                 child: InkWell(
@@ -89,9 +103,9 @@ class _CustomTextFormFieldState extends State<CustomTextFormField> {
                       : Icon(Icons.visibility_off,size: 15.r,),
                 ),
               )
-            : null,
+            : widget.suffixIcon,
         hintText: widget.hintText,
-        hintStyle: AppTextStyle.hintStyle,
+        hintStyle:widget.hintStyle?? AppTextStyle.hintStyle,
         fillColor: AppColor.primaryTextFormColor,
         filled: true,
         errorStyle: AppTextStyle.errorStyle,
@@ -99,6 +113,7 @@ class _CustomTextFormFieldState extends State<CustomTextFormField> {
         focusedBorder: focusBorder,
         errorBorder: errorBorder,
         focusedErrorBorder: focusBorder,
+        prefixIcon: widget.prefixIcon
       ),
     );
   }

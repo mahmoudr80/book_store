@@ -2,7 +2,7 @@
 import 'package:book_store/gen/translations/local_keys.g.dart';
 import 'package:easy_localization/easy_localization.dart';
 
-class AuthValidators{
+class Validators{
   static String? validateEmail(String? email) {
 
     if (email == null || email.trim().isEmpty) {
@@ -48,6 +48,39 @@ static  String? validateConfirmPassword(String? confirmPassword, String password
     if (username == null || username.trim().isEmpty) {
       return LocaleKeys.username_required.tr();
        // "Username is required";
+    }
+    return null;
+  }
+
+  static String? validateEgyptPhone(String? value) {
+    if (value == null || value.isEmpty) {
+      return "Phone is required";
+    }
+
+    final regex = RegExp(r'^01[0125][0-9]{8}$');
+
+    if (!regex.hasMatch(value)) {
+      return "Enter a valid Egyptian phone number";
+    }
+
+    return null;
+  }
+
+  static String? validateAddress(String? value) {
+    if (value == null || value.isEmpty) {
+      return "Address is required";
+    }
+
+    if (value.length < 10) {
+      return "Address is too short";
+    }
+
+    return null;
+  }
+
+  static String? validateGovernorate(String? value) {
+    if (value == null || value.isEmpty) {
+      return "Please select a governorate";
     }
     return null;
   }

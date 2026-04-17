@@ -15,14 +15,14 @@ class AuthenticationCubit extends Cubit<AuthenticationState> {
   Future<void> login(String email,String password) async {
     emit(state.copyWith(status: EnStatus.loading,action: EnAction.login));
     try{
-      final UserModel user = await repo.login(email, password);
+      final AuthUserModel user = await repo.login(email, password);
       emit(state.copyWith(status: EnStatus.success,action: EnAction.login,user: user));
     } catch(e){
       final message = e.toString().replaceFirst('Exception: ', '');
       emit(state.copyWith(status: EnStatus.fail,action: EnAction.login,error: message));
     }
   }
-  Future<void> register(UserModel newUser) async {
+  Future<void> register(AuthUserModel newUser) async {
     emit(state.copyWith(action: EnAction.register,status: EnStatus.loading));
     try{
       final user = await repo.register(newUser);

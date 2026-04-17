@@ -1,6 +1,8 @@
+import 'package:book_store/core/dependency_injection/service_locator.dart';
 import 'package:book_store/core/network/api_constants.dart';
 import 'package:book_store/core/network/api_error_handler.dart';
 import 'package:book_store/core/network/api_error_model.dart';
+import 'package:book_store/core/session/session_manager.dart';
 import 'package:dio/dio.dart';
 import 'package:flutter/foundation.dart';
 import 'package:pretty_dio_logger/pretty_dio_logger.dart';
@@ -23,9 +25,20 @@ class ApiHelper {
     }
   }
 
-  Future<ApiResult<dynamic>> get(String path) async {
+  Future<ApiResult<dynamic>> get({required String path, Map<String, dynamic>?param}) async {
     try{
-      final response = await _dio.get(path);
+      _dio.interceptors.add(
+        InterceptorsWrapper(
+          onRequest: (options, handler) async {
+            final token = await getIt<SessionManager>().getToken();
+            if (token != null) {
+              options.headers["Authorization"] = "Bearer $token";
+            }
+            return handler.next(options);
+          },
+        ),
+      );
+      final response = await _dio.get(path,queryParameters: param);
       _dio.interceptors.add(PrettyDioLogger());
 
 // customization

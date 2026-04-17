@@ -13,3 +13,23 @@ final class SliderFailed extends HomeState {
   SliderFailed(this.error);
 }
 final class SliderLoading extends HomeState {}
+
+final class BestSellerSuccess extends HomeState {
+  final BookListModel bestSellerBooks;
+  BestSellerSuccess( this.bestSellerBooks);
+}
+final class BestSellerFailed extends HomeState {
+  final String error;
+  BestSellerFailed(this.error);
+}
+final class BestSellerLoading extends HomeState {}
+
+final class SearchSuccess extends HomeState {
+  final BookListModel bestSellerBooks;
+  SearchSuccess( this.bestSellerBooks);
+}
+final class SearchFailed extends HomeState {
+  final String error;
+  SearchFailed(this.error);
+}
+final class SearchLoading extends HomeState {}

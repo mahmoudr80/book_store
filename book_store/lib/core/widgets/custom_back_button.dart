@@ -12,6 +12,6 @@ class CustomBackButton extends StatelessWidget {
       margin: EdgeInsets.symmetric(horizontal: 5.w),
       width:41.r,height:41.r,decoration :BoxDecoration(color: Colors.white
         ,borderRadius: BorderRadius.circular(12.r),border: Border.all(color: AppColor.borderColor)),
-      child: IconButton(onPressed:tapped , icon:Icon(Icons.arrow_back_ios)),);
+      child: IconButton(onPressed:tapped , icon:Icon(Icons.arrow_back_ios,color: Colors.black,)),);
   }
 }

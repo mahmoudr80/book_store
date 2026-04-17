@@ -27,26 +27,26 @@ final GlobalKey<FormState>formKey;
             hintText: LocaleKeys.auth_username.tr(),
             controller: usernameController,
             validators: (username) =>
-                AuthValidators.validateUsername(username),
+                Validators.validateUsername(username),
           ),
           CustomTextFormField(
             hintText: LocaleKeys.auth_email.tr(),
             controller: emailController,
             validators: (email) =>
-                AuthValidators.validateEmail(email),
+                Validators.validateEmail(email),
           ),
           CustomTextFormField(
             hintText: LocaleKeys.auth_password.tr(),
             controller: passController,
             secured: true,
             validators: (password) =>
-                AuthValidators.validatePassword(password),
+                Validators.validatePassword(password),
           ),
           CustomTextFormField(
             hintText: LocaleKeys.auth_confirm_password.tr(),
             secured: true,
             validators: (confirmPassword) =>
-                AuthValidators.validateConfirmPassword(
+                Validators.validateConfirmPassword(
                   confirmPassword,
                   passController.text,
                 ),

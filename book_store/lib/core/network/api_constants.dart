@@ -3,6 +3,11 @@ class ApiConstants {
   static const loginEndPoint="login";
   static const registerEndPoint="register";
   static const sliderEndPoint="sliders";
+  static const wishListEndPoint="wishlist";
+  static const bestSellerProductEndPoint="wishlist";
+  static const searchOnProductEndPoint="products-search";
+  static const cartProductEndPoint="cart";
+  static const profileEndPoint="profile";
   static const int connectionTimeoutWithSec=20;
   static const int receiveTimeoutWithSec=20;
 

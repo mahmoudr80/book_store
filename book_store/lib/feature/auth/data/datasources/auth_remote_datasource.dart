@@ -14,7 +14,7 @@ Future<SessionModel> login(Map<String,dynamic>json) async {
 
   final response = await _helper.post(ApiConstants.loginEndPoint,data: json);
   if(response is Success){
-    final user =UserModel.fromJson(response.data["data"]["user"]);
+    final user =AuthUserModel.fromJson(response.data["data"]["user"]);
     final token = response.data["data"]["token"];
     return SessionModel(token: token, user: user);
   }
@@ -29,7 +29,7 @@ Future<SessionModel> login(Map<String,dynamic>json) async {
 Future<SessionModel> register(Map<String,dynamic>json) async {
   final response = await _helper.post(ApiConstants.registerEndPoint,data: json);
   if(response is Success){
-    final user =UserModel.fromJson(response.data["data"]["user"]);
+    final user =AuthUserModel.fromJson(response.data["data"]["user"]);
     final token = response.data["data"]["token"];
     return SessionModel(token: token, user: user);
   }
