@@ -79,7 +79,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                       );
                       Navigator.pushNamed(
                         context,
-                        RoutesScreens.homeScreen,
+                        RoutesScreens.navigationScreen,
                         arguments: state.currentUser,
                       );
                     }
@@ -89,7 +89,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                     tapped: () {
                       if (key.currentState?.validate() ?? false) {
                         context.read<AuthenticationCubit>().register(
-                          UserModel(name: usernameController.text, email: emailController.text, password: passController.text, password_confirmation: confirmPassController.text,),
+                          AuthUserModel(name: usernameController.text, email: emailController.text, password: passController.text, password_confirmation: confirmPassController.text,),
                         );
                       } else {
                         AppSnackbar.showError(

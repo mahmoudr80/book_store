@@ -85,7 +85,7 @@ class _LoginScreenState extends State<LoginScreen> {
                       );
                       Navigator.pushNamed(
                         context,
-                        RoutesScreens.homeScreen,
+                        RoutesScreens.navigationScreen,
                         arguments: state.currentUser,
                       );
                     }

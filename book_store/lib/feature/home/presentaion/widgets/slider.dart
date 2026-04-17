@@ -1,9 +1,12 @@
 import 'package:book_store/core/theme/app_color.dart';
 import 'package:book_store/feature/home/presentaion/cubit/home_cubit.dart';
+import 'package:book_store/gen/assets.gen.dart';
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:lottie/lottie.dart';
+import 'package:shimmer/shimmer.dart';
 import 'package:smooth_page_indicator/smooth_page_indicator.dart';
 
 class SliderWidget extends StatefulWidget {
@@ -27,6 +30,8 @@ class _SliderWidgetState extends State<SliderWidget> {
   @override
   Widget build(BuildContext context) {
     return BlocBuilder<HomeCubit, HomeState>(
+      buildWhen: (previous, current) => current is SliderSuccess ||
+          current is SliderFailed || current is SliderLoading ,
       builder: (context, state) {
         if (state is SliderSuccess) {
           final sliders = state.sliderUrls
@@ -82,14 +87,22 @@ class _SliderWidgetState extends State<SliderWidget> {
           );
         }
         if (state is SliderLoading) {
-          return Center(
-            child: CircularProgressIndicator(color: AppColor.primaryColor),
+          return SizedBox(
+            height: 200,
+            width: 400,
+            child: Shimmer.fromColors(baseColor:AppColor.primaryColor.withAlpha(50),
+                highlightColor:Colors.white, child: Container(
+                  margin: EdgeInsetsGeometry.only(left: 35.w),
+              height: 200,
+              width: 400,
+              color: AppColor.primaryColor,
+            )),
           );
         }
-        if (state is SliderFailed) {
-          return Center(child: Text("Something went wrong"));
+        else{
+          return Lottie.asset(Assets.animations.notFoundJson);
         }
-        return const SizedBox();
+
       },
     );
   }

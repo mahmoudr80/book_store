@@ -1,4 +1,4 @@
-class UserModel {
+class AuthUserModel {
   final int? id;
   final String name;
   final String email;
@@ -10,7 +10,7 @@ class UserModel {
   final String? image;
   final bool email_verified;
 
-  UserModel({
+  AuthUserModel({
     this.id,
     required this.name,
     required this.email,
@@ -23,8 +23,8 @@ class UserModel {
     this.password_confirmation,
   });
 
-  factory UserModel.fromJson(Map<String, dynamic> json) {
-    return UserModel(
+  factory AuthUserModel.fromJson(Map<String, dynamic> json) {
+    return AuthUserModel(
       id: json["id"],
       name: json["name"],
       email: json["email"],

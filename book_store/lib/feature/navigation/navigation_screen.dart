@@ -1,23 +1,32 @@
 import 'package:book_store/core/helper/app_constants.dart';
 import 'package:book_store/core/theme/app_color.dart';
-import 'package:book_store/feature/book_mark/book_mark_screen.dart';
-import 'package:book_store/feature/cart/cart_screen.dart';
-import 'package:book_store/feature/home/presentaion/home_screen.dart';
-import 'package:book_store/profile/profile_screen.dart';
+import 'package:book_store/feature/cart/presentation/screens/cart_screen.dart';
+import 'package:book_store/feature/home/presentaion/screens/home_screen.dart';
+import 'package:book_store/feature/wish_list/presentation/wish_list_screen.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 
+import '../../core/dependency_injection/service_locator.dart';
 import '../../gen/assets.gen.dart';
-const List<Widget>screens = [HomeScreen(),BookMarkScreen(),CartScreen(),ProfileScreen()];
-class BottomNavBarScreen extends StatefulWidget {
-  const BottomNavBarScreen({super.key});
+import '../cart/data/repository/home_repository.dart';
+import '../cart/domain/usecase/getCartProductsUseCase.dart';
+import '../cart/presentation/cubit/cart_cubit.dart';
+import '../cart/presentation/screens/place_order_screen.dart';
+import '../profile/presentation/screens/profile_screen.dart';
+ List<Widget>screens = [HomeScreen(),WishListScreen(),
+BlocProvider(create: (context) =>
+CartCubit(GetCartProductsUseCase(getIt<CartRepositoryImpl>()))..getCartProducts(),
+  child: CartScreen()),ProfileScreen()];
+class NavigationScreen extends StatefulWidget {
+  const NavigationScreen({super.key});
 
   @override
-  State<BottomNavBarScreen> createState() => _BottomNavBarScreenState();
+  State<NavigationScreen> createState() => _NavigationScreenState();
 }
 
-class _BottomNavBarScreenState extends State<BottomNavBarScreen> {
-  int currentIndex = 0 ;
+class _NavigationScreenState extends State<NavigationScreen> {
+  int currentIndex = 3 ;
   @override
   Widget build(BuildContext context) {
     return Scaffold(

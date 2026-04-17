@@ -24,7 +24,7 @@ final GlobalKey<FormState>formKey;
             controller: emailController,
             keyboardType:TextInputType.emailAddress ,
             validators: (email) =>
-                AuthValidators.validateEmail(email),
+                Validators.validateEmail(email),
           ),
           SizedBox(height: 15.h),
           CustomTextFormField(
@@ -32,7 +32,7 @@ final GlobalKey<FormState>formKey;
             secured: true,
             controller: passController,
             validators: (pass) =>
-                AuthValidators.validatePassword(pass),
+                Validators.validatePassword(pass),
           ),
         ],
       ),

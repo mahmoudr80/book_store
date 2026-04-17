@@ -1,4 +1,6 @@
 import 'dart:io';
+import 'package:book_store/core/dependency_injection/service_locator.dart';
+import 'package:book_store/core/session/session_manager.dart';
 import 'package:dio/dio.dart';
 import 'api_error_model.dart';
 
@@ -19,7 +21,15 @@ abstract class ApiErrorHandler {
             } else {
               return ApiErrorModel(error: "Unexpected error");
             }
-          } else {
+          }
+          else if(error.response!=null&& error.response!.statusCode==401){
+            getIt<SessionManager>().clearSession();
+            return ApiErrorModel(
+              error: error.response?.data["message"],
+              code: error.response?.statusCode,
+            );
+          }
+          else {
             return ApiErrorModel(
               error: error.response?.data["message"],
               code: error.response?.statusCode,
