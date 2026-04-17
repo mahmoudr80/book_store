@@ -1,4 +1,4 @@
-# 📚 E-Commerce Book Store App (Flutter)
+<img width="499" height="1030" alt="7" src="https://github.com/user-attachments/assets/18a69cce-79aa-4e03-b2c2-c87fd66c8a2e" /># 📚 E-Commerce Book Store App (Flutter)
 
 A scalable and responsive e-commerce mobile application for browsing and purchasing books, built using Flutter and modern software architecture principles.
 
@@ -46,43 +46,46 @@ Modular and reusable components
 Clean and maintainable codebase
 
 # 📸 Screenshots
+
 <table>
-<tr>
-  <td><img src="https://github.com/user-attachments/assets/416a8452-5efb-4ce1-bc8c-29546243d871"  width="250"/></td>
-  <td> <img src="https://github.com/user-attachments/assets/aecf635e-134b-43a9-b9d5-763b73c91979"  width="250"/></td>
-   <td>  <img  src="https://github.com/user-attachments/assets/c9c9ae24-c4eb-47cb-a2c9-b3dc004e74f3" width="250"/></td>
- </tr>
-
-   <tr>
-   <td> <img src="https://github.com/user-attachments/assets/e9d90b07-8814-43c2-a172-d06ecc826a54" width="250"/></td>
-     <td>   <img src="https://github.com/user-attachments/assets/e12ff4e4-9d6b-4fec-b4b3-b64a2b43dd36" width="250"/></td>
-      <td>    <img src="https://github.com/user-attachments/assets/ab01d831-7020-4ecf-bdfb-ab6998ed16e1" width="250"/></td>
-    
- </tr>
   <tr>
-      <td>   <img src="https://github.com/user-attachments/assets/27374439-1a11-4edb-a727-5f987d2fefcf"width="250"/></td>
-      <td>   <img src="https://github.com/user-attachments/assets/af4ebd54-85d3-450f-85fc-305d91c74407"width="250"/></td>
-        <td>      <img src="https://github.com/user-attachments/assets/abc451ed-b60b-4e71-8627-8d7c8ff90e52" width="250"/></td>
- </tr>
-       <tr>
-        
-       <td>  <img src="https://github.com/user-attachments/assets/be70411d-95b5-4516-9bb2-d46502a9350d" width="250"/></td>
-       <td> <img src="https://github.com/user-attachments/assets/d8085e8d-a64f-4bd8-81ca-91f80f59209c" width="250"/></td>
-         <td>   <img src="https://github.com/user-attachments/assets/2b42cc8d-5327-46b9-93b3-79f0d45ad8d2"width="250"/></td>
- </tr>
+    <td><img src="https://github.com/user-attachments/assets/48f9efee-761a-4c8a-92e3-56c242c61d83" width="250"/></td>
+    <td><img src="https://github.com/user-attachments/assets/d53160c3-c9d4-4c7f-bbe7-22517b8b8f6b" width="250"/></td>
+    <td><img src="https://github.com/user-attachments/assets/e235505f-2e5c-4266-8a6a-10153100f13f" width="250"/></td>
+  </tr>
   <tr>
-     <td> <img src="https://github.com/user-attachments/assets/fa895d20-b294-428b-8f73-6b5a75ba593c"width="250"/></td>
-             <td> <img src="https://github.com/user-attachments/assets/e196de16-98cc-491b-bad6-87ec725d7fc1"width="250"/></td>
-     <td> <img src="https://github.com/user-attachments/assets/10a71809-2511-49d9-9294-a5b8c7449898"width="250"/></td>
- </tr>
+    <td><img src="https://github.com/user-attachments/assets/add31c49-d380-4a9a-ab6e-b575d2cf6c74" width="250"/></td>
+    <td><img src="https://github.com/user-attachments/assets/5bcdba7e-9339-45aa-9c90-bd92ce6315c6"  width="250"/></td>
+    <td><img src="https://github.com/user-attachments/assets/74c96138-a001-4d71-9f31-2fd3dd4f6e8d" width="250"/></td>
+  </tr>
+  <tr>
+    <td><img src="https://github.com/user-attachments/assets/3572f0c2-6c23-477d-b314-03fe7efcaf55" width="250"/></td>
+  <td><img src="https://github.com/user-attachments/assets/5c67ffff-38d7-4c65-a0e2-65872c22b1e1" width="250"/></td>
+    <td><img src="https://github.com/user-attachments/assets/ab1e2346-db5a-426f-a449-775a73722d03" width="250"/></td>
+  </tr>
+  
+  <tr>
+    <td><img src="https://github.com/user-attachments/assets/f8fc7621-b2dc-4483-9bc6-f8cc32f3e60b" width="250"/></td>    
+    <td><img src="https://github.com/user-attachments/assets/d1985043-2c95-408d-8f59-5d3269635e80" width="250"/></td>    
+    <td><img src="https://github.com/user-attachments/assets/2c0dca5f-27f3-45e7-8b65-979772b26498" width="250"/></td>    
+  </tr>
 
-   <tr>
-   
-   <td> <img src="https://github.com/user-attachments/assets/0228d67b-f483-477c-b95f-4efd2b54fb86" width="250"/></td>
- </tr>
-          </table>
+  <tr>
+    <td><img src="https://github.com/user-attachments/assets/c09a83a5-d717-451f-853b-84f944c67bc4" width="250"/></td>
+    <td><img src="https://github.com/user-attachments/assets/943a7e59-1b6c-40a1-b136-15104ac023f9" width="250"/></td>
+    <td><img src="https://github.com/user-attachments/assets/0d2a468a-a81c-458f-ae5a-08f17103f6d2" width="250"/></td>
+  </tr>
+    <tr>
+    <td><img src="https://github.com/user-attachments/assets/095dcd59-d775-4e58-9c8f-b8247cbc174c" width="250"/></td>      
+    <td><img src="https://github.com/user-attachments/assets/fbabda30-3a32-4918-b6f1-272be746603c" width="250"/></td>
+    <td><img src="https://github.com/user-attachments/assets/4e3b6c9c-93aa-44d4-853a-9355bde4c838" width="250"/></td>
+  </tr>
 
-
+    <tr>
+    <td><img src="https://github.com/user-attachments/assets/6a1c963e-5469-4474-9ecf-070c7fc40e4f" width="250"/></td>
+  </tr>
+  
+</table>
 
 🛠️ Future Improvements
 Payment integration
