@@ -1,4 +1,4 @@
-<img width="499" height="1030" alt="7" src="https://github.com/user-attachments/assets/18a69cce-79aa-4e03-b2c2-c87fd66c8a2e" /># 📚 E-Commerce Book Store App (Flutter)
+# 📚 E-Commerce Book Store App (Flutter)
 
 A scalable and responsive e-commerce mobile application for browsing and purchasing books, built using Flutter and modern software architecture principles.
 
