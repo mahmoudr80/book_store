@@ -82,7 +82,7 @@ Clean and maintainable codebase
   </tr>
 
     <tr>
-    <td><img src="https://github.com/user-attachments/assets/6a1c963e-5469-4474-9ecf-070c7fc40e4f" width="250"/></td>
+    <img src="https://github.com/user-attachments/assets/6a1c963e-5469-4474-9ecf-070c7fc40e4f" width="250"/>
   </tr>
   
 </table>
