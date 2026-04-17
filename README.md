@@ -80,10 +80,8 @@ Clean and maintainable codebase
     <td><img src="https://github.com/user-attachments/assets/fbabda30-3a32-4918-b6f1-272be746603c" width="250"/></td>
     <td><img src="https://github.com/user-attachments/assets/4e3b6c9c-93aa-44d4-853a-9355bde4c838" width="250"/></td>
   </tr>
-
- <tr><img width="250" src="https://github.com/user-attachments/assets/7e305595-114a-4e42-9021-9584ee847bf1" /> </tr>
-  
 </table>
+ <img width="250" src="https://github.com/user-attachments/assets/7e305595-114a-4e42-9021-9584ee847bf1" />
 
 🛠️ Future Improvements
 Payment integration
