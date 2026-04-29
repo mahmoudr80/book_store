@@ -2,6 +2,10 @@
 
 A scalable and responsive e-commerce mobile application for browsing and purchasing books, built using Flutter and modern software architecture principles.
 
+# download apk:
+https://drive.google.com/drive/folders/17Ujxrx9ERSdhhsOTUqhBAAKvIuKlmaRZ?usp=sharing
+
+
 🚀 Features
 📖 Browse books with detailed information
 🔍 Search functionality
