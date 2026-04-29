@@ -50,80 +50,77 @@ class _LoginScreenState extends State<LoginScreen> {
               left: 22.w,
               right: 22.w,
             ),
-            child: Column(
-              children: [
-                Spacer(flex: 4),
-                Container(
-                  padding: EdgeInsets.only(right: 73.w),
-                  child: Text(
-                    LocaleKeys.auth_welcome_back.tr(),
-                    style: Theme.of(context).textTheme.headlineLarge,
-                  ),
-                ),
-                Spacer(flex: 4),
-                LoginForm(emailController: emailController,
-                  passController: passController,formKey: key,),
-                Spacer(flex: 1),
-                Row(mainAxisAlignment: MainAxisAlignment.end,
-                  children: [
-                    Customtextrich(
-                      textButton: LocaleKeys.auth_forgot_password.tr(),
-                      tapped: () => Navigator.pushNamed(context, RoutesScreens.forgetPasswordScreen),
+            child: SingleChildScrollView(
+              child: Column(
+                spacing: 15.h,
+                children: [
+                  Container(
+                    padding: EdgeInsets.only(right: 73.w),
+                    child: Text(
+                      LocaleKeys.auth_welcome_back.tr(),
+                      style: Theme.of(context).textTheme.headlineLarge,
                     ),
-                  ],
-                ),
-                Spacer(flex: 4),
-                BlocConsumer<AuthenticationCubit,AuthenticationState>(
-                  listener: (context, state) {
-                    if (state.enCurrentAction==EnAction.login&&state.enCurrentStatus==EnStatus.fail) {
-                      Navigator.pop(context);
-                      AppSnackbar.showError(context, state.errorMessage!);
-                    } else if (state.enCurrentAction==EnAction.login&&state.enCurrentStatus==EnStatus.success) {
-                      AppSnackbar.showSuccess(
-                        context,
-                        LocaleKeys.login_successfully.tr(),
-                      );
-                      Navigator.pushNamed(
-                        context,
-                        RoutesScreens.navigationScreen,
-                        arguments: state.currentUser,
-                      );
-                    }
-                    else if (state.enCurrentAction==EnAction.login&&state.enCurrentStatus==EnStatus.loading) {
-                    showDialog(context: context,
-                        builder:(context) => Center(child: CircularProgressIndicator(color: AppColor.primaryColor,),),);
-                    }
-                  },
-                  builder: (context, state)
-                    {
-                    return  AppButton(
-                        label: LocaleKeys.login.tr(),
-                        tapped: () {
-                          if (key.currentState?.validate() ?? false) {
-                            context.read<AuthenticationCubit>().login(
-                              emailController.text,
-                              passController.text,
-                            );
-                          } else {
-                            AppSnackbar.showError(
-                              context,
-                              LocaleKeys.invalid_credential.tr(),
-                            );
-                          }
-                        },
-                      );
-                    }
+                  ),
+                  LoginForm(emailController: emailController,
+                    passController: passController,formKey: key,),
+                  Row(mainAxisAlignment: MainAxisAlignment.end,
+                    children: [
+                      Customtextrich(
+                        textButton: LocaleKeys.auth_forgot_password.tr(),
+                        tapped: () => Navigator.pushNamed(context, RoutesScreens.forgetPasswordScreen),
+                      ),
+                    ],
+                  ),
+                  BlocConsumer<AuthenticationCubit,AuthenticationState>(
+                    listener: (context, state) {
+                      if (state.enCurrentAction==EnAction.login&&state.enCurrentStatus==EnStatus.fail) {
+                        Navigator.pop(context);
+                        AppSnackbar.showError(context, state.errorMessage!);
+                      } else if (state.enCurrentAction==EnAction.login&&state.enCurrentStatus==EnStatus.success) {
+                        AppSnackbar.showSuccess(
+                          context,
+                          LocaleKeys.login_successfully.tr(),
+                        );
+                        Navigator.pushNamed(
+                          context,
+                          RoutesScreens.navigationScreen,
+                          arguments: state.currentUser,
+                        );
+                      }
+                      else if (state.enCurrentAction==EnAction.login&&state.enCurrentStatus==EnStatus.loading) {
+                      showDialog(context: context,
+                          builder:(context) => Center(child: CircularProgressIndicator(color: AppColor.primaryColor,),),);
+                      }
+                    },
+                    builder: (context, state)
+                      {
+                      return  AppButton(
+                          label: LocaleKeys.login.tr(),
+                          tapped: () {
+                            if (key.currentState?.validate() ?? false) {
+                              context.read<AuthenticationCubit>().login(
+                                emailController.text,
+                                passController.text,
+                              );
+                            } else {
+                              AppSnackbar.showError(
+                                context,
+                                LocaleKeys.invalid_credential.tr(),
+                              );
+                            }
+                          },
+                        );
+                      }
 
-                ),
-                Spacer(flex: 4),
-                SizedBox(width: 331.w, height: 167.h, child: SignInWidget()),
-                Spacer(flex: 12),
-                Customtextrich(
-                  textTitle: LocaleKeys.auth_no_account.tr(),
-                  textButton: LocaleKeys.auth_register_now.tr(),
-                  tapped: ()=>Navigator.pushReplacementNamed(context, RoutesScreens.registerScreen),
-                ),
-              ],
+                  ),
+                  SizedBox(width: 331.w, height: 167.h, child: SignInWidget()),
+                  Customtextrich(
+                    textTitle: LocaleKeys.auth_no_account.tr(),
+                    textButton: LocaleKeys.auth_register_now.tr(),
+                    tapped: ()=>Navigator.pushReplacementNamed(context, RoutesScreens.registerScreen),
+                  ),
+                ],
+              ),
             ),
           ),
         ),

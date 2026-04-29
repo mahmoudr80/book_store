@@ -15,3 +15,6 @@ final class GetUserFailed extends ProfileState {
 
   GetUserFailed(this.error);
 }
+
+final class LogoutSuccess extends ProfileState {}
+final class ResetPasswordSuccess extends ProfileState {}

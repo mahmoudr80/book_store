@@ -10,18 +10,18 @@ final HomeRemoteDatasource _datasource;
 const HomeRepository(this._datasource);
 
 
-@override
   Future <BookListModel>getBestSeller() async {
     final response= await _datasource.getBestSellerProducts();
     return response;
   }
-
-  @override
+Future <BookListModel>getAllProducts() async {
+  final response= await _datasource.getAllProducts();
+  return response;
+}
   Future<BookListModel> getBooksByName(String name) async {
     return await getBestSeller();
   }
 
-  @override
   Future<SliderModel> getSlider() async {
      SliderModel sliderModel= await _datasource.getSliders();
     return  sliderModel;
@@ -30,5 +30,10 @@ const HomeRepository(this._datasource);
 Future <BookListModel>searchProduct(String name) async{
 return await  _datasource.searchProduct(name);
 }
-
+Future<bool>addToWishList(int id) async {
+  return await  _datasource.addToWishList(id);
+}
+Future<bool>addToCart(int id) async {
+  return await  _datasource.addToCart(id);
+}
 }

@@ -54,13 +54,13 @@ static  String? validateConfirmPassword(String? confirmPassword, String password
 
   static String? validateEgyptPhone(String? value) {
     if (value == null || value.isEmpty) {
-      return "Phone is required";
+      return LocaleKeys.phone_required.tr();
     }
 
     final regex = RegExp(r'^01[0125][0-9]{8}$');
 
     if (!regex.hasMatch(value)) {
-      return "Enter a valid Egyptian phone number";
+      return LocaleKeys.invalid_phone.tr();
     }
 
     return null;
@@ -68,11 +68,11 @@ static  String? validateConfirmPassword(String? confirmPassword, String password
 
   static String? validateAddress(String? value) {
     if (value == null || value.isEmpty) {
-      return "Address is required";
+      return LocaleKeys.address_required.tr();
     }
 
     if (value.length < 10) {
-      return "Address is too short";
+      return LocaleKeys.address_too_short.tr();
     }
 
     return null;
@@ -80,8 +80,9 @@ static  String? validateConfirmPassword(String? confirmPassword, String password
 
   static String? validateGovernorate(String? value) {
     if (value == null || value.isEmpty) {
-      return "Please select a governorate";
+      return LocaleKeys.governorate_required.tr();
     }
     return null;
   }
 }
+

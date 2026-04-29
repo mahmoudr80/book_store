@@ -30,11 +30,10 @@ class _SliderWidgetState extends State<SliderWidget> {
   @override
   Widget build(BuildContext context) {
     return BlocBuilder<HomeCubit, HomeState>(
-      buildWhen: (previous, current) => current is SliderSuccess ||
-          current is SliderFailed || current is SliderLoading ,
+
       builder: (context, state) {
-        if (state is SliderSuccess) {
-          final sliders = state.sliderUrls
+        if (state.status==EnHomeStatus.success) {
+          final sliders = state.sliderUrls!
               .map((e) => Image.network(e.imgUrl, fit: BoxFit.cover))
               .toList();
 
@@ -86,17 +85,19 @@ class _SliderWidgetState extends State<SliderWidget> {
             ],
           );
         }
-        if (state is SliderLoading) {
-          return SizedBox(
-            height: 200,
-            width: 400,
-            child: Shimmer.fromColors(baseColor:AppColor.primaryColor.withAlpha(50),
-                highlightColor:Colors.white, child: Container(
-                  margin: EdgeInsetsGeometry.only(left: 35.w),
+        if (state.status==EnHomeStatus.loading) {
+          return Center(
+            child: SizedBox(
               height: 200,
               width: 400,
-              color: AppColor.primaryColor,
-            )),
+              child: Shimmer.fromColors(baseColor:AppColor.primaryColor.withAlpha(50),
+                  highlightColor:Colors.white, child: Container(
+                    margin: EdgeInsetsGeometry.only(left: 35.w),
+                height: 200,
+                width: 400,
+                color: AppColor.primaryColor,
+              )),
+            ),
           );
         }
         else{

@@ -14,3 +14,5 @@ final class WishListFailed extends WishListState {
 
   WishListFailed(this.error);
 }
+
+final class RemoveFromWishListSuccess extends WishListState {}

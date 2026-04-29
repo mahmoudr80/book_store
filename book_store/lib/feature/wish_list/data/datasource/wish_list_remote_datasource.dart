@@ -20,4 +20,15 @@ class WishListRemoteDatasource {
     }
 throw Exception("UnExpected error");
   }
+  
+  Future<bool>removeFromWishlist(int id)async{
+    final response = await _helper.post(ApiConstants.removeFromWishlistEndPoint,
+    data: {"product_id":id});
+    if(response is Success){
+      return true;
+    }
+    else{
+      return false;
+    }
+  }
 }

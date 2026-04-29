@@ -39,19 +39,18 @@ class _RegisterScreenState extends State<RegisterScreen> {
 
   @override
   Widget build(BuildContext context) {
-    return BlocProvider(
-      create: (context) => AuthenticationCubit(getIt<AuthRepository>()),
-      child: Scaffold(
-        appBar: AppBar(
-          leading: CustomBackButton(tapped: () => Navigator.pop(context)),
-          leadingWidth: 60.w,
-        ),
-        body: SafeArea(
-          child: Padding(
-            padding: EdgeInsets.only(top: 11.h, bottom: 19.h, left: 22.w, right: 22.w,),
+    return Scaffold(
+      appBar: AppBar(
+        leading: CustomBackButton(tapped: () => Navigator.pop(context)),
+        leadingWidth: 60.w,
+      ),
+      body: SafeArea(
+        child: Padding(
+          padding: EdgeInsets.only(top: 11.h, bottom: 19.h, left: 22.w, right: 22.w,),
+          child: SingleChildScrollView(
             child: Column(
+              spacing: 25.h,
               children: [
-                Spacer(flex: 3),
                 Container(
                   padding: EdgeInsets.only(right: 73.w),
                   child: Text(
@@ -59,7 +58,6 @@ class _RegisterScreenState extends State<RegisterScreen> {
                     style: Theme.of(context).textTheme.headlineLarge,
                   ),
                 ),
-                Spacer(flex: 3),
                 RegisterForm(
                   usernameController: usernameController,
                   emailController: emailController,
@@ -67,8 +65,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                   confirmPassController: confirmPassController,
                   formKey: key,
                 ),
-                Spacer(flex: 3),
-                BlocConsumer<AuthenticationCubit,AuthenticationState>(
+                BlocListener<AuthenticationCubit,AuthenticationState>(
                   listener: (BuildContext context, state) {
                     if (state.enCurrentAction==EnAction.register&&state.enCurrentStatus==EnStatus.fail) {
                       AppSnackbar.showError(context, state.errorMessage!);
@@ -84,7 +81,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                       );
                     }
                   },
-                  builder: (context, state) => AppButton(
+                  child:  AppButton(
                     label: LocaleKeys.auth_register.tr(),
                     tapped: () {
                       if (key.currentState?.validate() ?? false) {
@@ -100,7 +97,6 @@ class _RegisterScreenState extends State<RegisterScreen> {
                     },
                   ),
                 ),
-                Spacer(flex: 18),
                 Customtextrich(
                   textTitle: LocaleKeys.auth_already_have_account.tr(),
                   textButton: LocaleKeys.auth_login_now.tr(),

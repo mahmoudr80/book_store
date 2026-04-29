@@ -21,7 +21,15 @@ class CartProductList extends StatelessWidget {
             if(state is CartSuccess){
               if( state.cartModel.data.cart_items.isNotEmpty){
                 return ListView.separated(itemBuilder: (context, index) =>
-                    CartWidget(cartItem: state.cartModel.data.cart_items[index]),
+                    CartWidget(cartItem: state.cartModel.data.cart_items[index],
+                    increaseByOne: () =>context.read<CartCubit>().update(
+                        state.cartModel.data.cart_items[index].item_id,state.cartModel.data.cart_items[index].item_quantity+1
+                    ) ,decreasedByOne: () =>
+                          context.read<CartCubit>().update(
+                              state.cartModel.data.cart_items[index].item_id,state.cartModel.data.cart_items[index].item_quantity-1
+                          ),removeItemTapped: () =>
+                          context.read<CartCubit>().
+                          removeItem( state.cartModel.data.cart_items[index].item_id),),
                     padding:  EdgeInsets.only(left: 20.0.w,right: 23.w,top: 50.h,bottom: 15.h),
                     separatorBuilder: (context, index) => SizedBox(height:30.h,child: Divider()),
                     itemCount: state.cartModel.data.cart_items.length);

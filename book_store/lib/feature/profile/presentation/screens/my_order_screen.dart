@@ -1,3 +1,5 @@
+import 'package:book_store/gen/translations/local_keys.g.dart';
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
@@ -17,7 +19,7 @@ class MyOrderScreen extends StatelessWidget {
           child: CustomBackButton(tapped: () => Navigator.pop(context)),
         ),
         leadingWidth: 70.w,
-        title: Text("My Orders",style: AppTextStyle.headlineStyle,),
+        title: Text(LocaleKeys.my_orders.tr(),style: AppTextStyle.headlineStyle,),
         centerTitle: true,
       ),
       body: SafeArea(
@@ -29,7 +31,7 @@ class MyOrderScreen extends StatelessWidget {
                   Row(
                     children: [
                       Spacer(),
-                      Text("Total Amount:",style: AppTextStyle.hintStyle,),
+                      Text(LocaleKeys.total_amount.tr(),style: AppTextStyle.hintStyle,),
                       Text("\$150",style: TextStyle(fontWeight: FontWeight.bold),),
                     ],
                   )

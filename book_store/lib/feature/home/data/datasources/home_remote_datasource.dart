@@ -25,7 +25,22 @@ class HomeRemoteDatasource {
   }
 
   Future <BookListModel>getBestSellerProducts() async {
-    final response=await _helper.get(path:  ApiConstants.bestSellerProductEndPoint);
+    final response=await _helper.get(path:
+    ApiConstants.bestSellerProductEndPoint);
+    if(response is Success){
+      final products = response.data;
+      return BookListModel.fromJson(products) ;
+    } else if(response is Failure){
+      throw Exception(response.errorModel.error);
+    }
+    else{
+      throw Exception("Unexpected error");
+    }
+  }
+
+  Future <BookListModel>getAllProducts() async {
+    final response=await _helper.get(path:
+    ApiConstants.getAllProductsEndPoint);
     if(response is Success){
       final products = response.data;
       return BookListModel.fromJson(products) ;
@@ -52,5 +67,30 @@ class HomeRemoteDatasource {
     }
   }
 
+  Future<bool>addToWishList(int id)async{
+    final response = await _helper.post(ApiConstants.addToWishlistEndPoint,data:
+    {
+      "product_id":id
+    });
+    if(response is Success){
+      return true;
+    }
+    else{
+      return false;
+    }
+    }
+  Future<bool>addToCart(int id)async{
+    final response = await _helper.post(ApiConstants.addToCartEndPoint,
+        data:
+    {
+      "product_id":id
+    });
+    if(response is Success){
+      return true;
+    }
+    else{
+      return false;
+    }
+  }
 
 }

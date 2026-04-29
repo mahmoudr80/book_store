@@ -20,4 +20,30 @@ class ProfileRemoteDatasource {
       throw Exception("Un expected error");
     }
   }
+  Future<bool> updateUser(String name,String phone,String address) async {
+    final response=await _helper.post( ApiConstants.updateUserEndPoint
+    ,data: {
+          "name":name,
+          "address" :address,
+          "phone":phone
+        });
+    if(response is Success){
+     return true;
+    }
+    else{
+      return false;    }
+  }
+  Future<bool> resetPassword(String currentPass,String newPass,String confirmPass) async{
+    final response=await _helper.post( ApiConstants.resetPasswordEndPoint
+        ,data: {
+          "current_password":currentPass,
+          "new_password" :newPass,
+          "new_password_confirmation":confirmPass
+        });
+    if(response is Success){
+      return true;
+    }
+    else{
+      return false;    }
+  }
 }

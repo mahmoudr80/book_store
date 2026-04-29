@@ -21,4 +21,30 @@ class CartRemoteDatasource {
       throw Exception("Unexpected error");
     }
   }
+
+  Future<bool>updateCartItem(int id,int quantity) async {
+    final response=await _helper.post(ApiConstants.updateCartEndPoint,
+    data: {
+      "cart_item_id" : id,
+      "quantity":quantity
+    });
+    if(response is Success){
+      return true;
+    }
+    else{
+      return false;
+    }
+  }
+  Future<bool> removeItem(int id) async  {
+    final response=await _helper.post(ApiConstants.removeItemFromCartEndPoint,
+    data: {
+      "cart_item_id" : id,
+    });
+    if(response is Success){
+      return true;
+    }
+    else{
+      return false;
+    }
+  }
 }

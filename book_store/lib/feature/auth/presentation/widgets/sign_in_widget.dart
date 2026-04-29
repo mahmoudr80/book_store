@@ -16,7 +16,7 @@ class SignInWidget extends StatelessWidget {
       children: [
         Row(children: [
           Expanded(child: Divider(color:AppColor.borderColor,)),
-          Expanded(child: Text("OR",textAlign: TextAlign.center,style: TextStyle(color: AppColor.primaryTextFormIconColor),)),
+          Expanded(child: Text(LocaleKeys.or.tr(),textAlign: TextAlign.center,style: TextStyle(color: AppColor.primaryTextFormIconColor),)),
           Expanded(child: Divider(color:AppColor.borderColor,))],),
         SizedBox(height: 21.h,),
         CustomSignInButton(image: Assets.images.googleIcon.image(), title: LocaleKeys.auth_sign_in_with_google.tr()),

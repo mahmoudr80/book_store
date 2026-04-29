@@ -7,6 +7,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:lottie/lottie.dart';
 import 'package:shimmer/shimmer.dart';
 
+import '../../../../core/utils/app_snackBar.dart';
 import '../cubit/wish_list_cubit.dart';
 
 class WishList extends StatelessWidget {
@@ -18,14 +19,22 @@ class WishList extends StatelessWidget {
       child: BlocBuilder<WishListCubit, WishListState>(
         builder: (context, state) {
           if(state is WishListSuccess){
-            return GridView.builder(
+            return   BlocListener<WishListCubit, WishListState>(
+                listenWhen: (previous, current) => current is RemoveFromWishListSuccess,
+                listener: (context, state) {
+                  if(state is RemoveFromWishListSuccess){
+                    AppSnackbar.showSuccess(context,"removed from wishlist success");
+                  }
+
+                },
+                child: GridView.builder(
               padding: EdgeInsets.all(10.r), itemCount: state.wishListProduct.data.length
               , gridDelegate:
             SliverGridDelegateWithFixedCrossAxisCount(crossAxisCount: 2,
-                childAspectRatio: 0.67,
+                childAspectRatio: 0.69,
                 crossAxisSpacing: 15.w,
                 mainAxisSpacing: 10.h),
-              itemBuilder: (context, index) => WishlistProductItem(product: state.wishListProduct.data[index]),);
+              itemBuilder: (context, index) => WishlistProductItem(product: state.wishListProduct.data[index]),));
           }
           else if (state is WishListLoading){
             return Shimmer.fromColors(

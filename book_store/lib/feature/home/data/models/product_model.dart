@@ -38,7 +38,7 @@ class BookListModel{
    required this.error,required this.status});
 factory BookListModel.fromJson(Map<String,dynamic>json){
 
-  return BookListModel(data: (json["data"]["data"] as List).map((element)=>BookModel.fromJson(element)).toList(),
+  return BookListModel(data: (json["data"]["products"] as List).map((element)=>BookModel.fromJson(element)).toList(),
       message: json["message"], error: json["error"], status: json["status"]);
 }
 

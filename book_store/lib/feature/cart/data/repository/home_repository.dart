@@ -14,6 +14,16 @@ const CartRepositoryImpl(this._datasource);
 
   }
 
+  @override
+  Future<bool> updateItem(int id, int quantity) async {
+    return await _datasource.updateCartItem(id, quantity);
+  }
+
+  @override
+  Future<bool> removeItem(int id) async {
+    return await _datasource.removeItem(id);
+  }
+
 
 
 }

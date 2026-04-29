@@ -1,22 +1,27 @@
 import 'package:book_store/feature/auth/presentation/screens/forget_password_screen.dart';
 import 'package:book_store/feature/auth/presentation/screens/login_screen.dart';
 import 'package:book_store/feature/auth/presentation/screens/register_screen.dart';
+import 'package:book_store/feature/cart/domain/usecase/remove_item_usecase.dart';
 import 'package:book_store/feature/cart/presentation/screens/congrats_screen.dart';
 import 'package:book_store/feature/cart/presentation/screens/place_order_screen.dart';
 import 'package:book_store/feature/home/data/repository/home_repository.dart';
 import 'package:book_store/feature/home/presentaion/cubit/home_cubit.dart';
 import 'package:book_store/feature/home/presentaion/screens/book_details_screen.dart';
+import 'package:book_store/feature/navigation/cubit/navigation_cubit.dart';
 import 'package:book_store/feature/profile/data/repository/profile_repository.dart';
 import 'package:book_store/feature/profile/presentation/cubit/profile_cubit.dart';
 import 'package:book_store/feature/profile/presentation/screens/my_order_screen.dart';
 import 'package:book_store/feature/profile/presentation/screens/update_password_screen.dart';
 import 'package:book_store/feature/profile/presentation/screens/update_profile_screen.dart';
-import 'package:book_store/feature/welcome/presentation/welcome_screen.dart';
+import 'package:book_store/feature/welcome/welcome_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
+import '../../feature/auth/data/repository/auth_repository.dart';
+import '../../feature/auth/presentation/cubit/authentication_cubit.dart';
 import '../../feature/cart/data/repository/home_repository.dart';
 import '../../feature/cart/domain/usecase/getCartProductsUseCase.dart';
+import '../../feature/cart/domain/usecase/updateCartItemUseCase.dart';
 import '../../feature/cart/presentation/cubit/cart_cubit.dart';
 import '../../feature/home/data/models/product_model.dart';
 import '../../feature/home/presentaion/screens/search_screen.dart';
@@ -41,11 +46,17 @@ abstract class RoutesScreens {
 Route<dynamic>? generateRoutes(RouteSettings route) {
   switch (route.name) {
     case RoutesScreens.registerScreen:
-      return MaterialPageRoute(builder: (_) => RegisterScreen(),);
+      return MaterialPageRoute(builder: (_) =>
+  BlocProvider(
+  create: (context) => AuthenticationCubit(getIt<AuthRepository>()),
+  child: RegisterScreen(),));
     case RoutesScreens.loginScreen:
       return MaterialPageRoute(builder: (_) => LoginScreen(),);
     case RoutesScreens.updatePasswordScreen:
-      return MaterialPageRoute(builder: (_) => UpdatePasswordScreen(),);
+      return MaterialPageRoute(builder: (_) => BlocProvider(
+  create: (context) => ProfileCubit(getIt<ProfileRepository>()),
+  child: UpdatePasswordScreen(),
+),);
     case RoutesScreens.myOrderScreen:
       return MaterialPageRoute(builder: (_) => MyOrderScreen(),);
     case RoutesScreens.updateProfileScreen:
@@ -60,21 +71,28 @@ Route<dynamic>? generateRoutes(RouteSettings route) {
     case RoutesScreens.congratsScreen:
       return MaterialPageRoute(builder: (_) => CongratsScreen(),);
     case RoutesScreens.navigationScreen:
-      return MaterialPageRoute(builder: (_) => NavigationScreen(),);
+      return MaterialPageRoute(builder: (_) => BlocProvider(
+  create: (context) => NavigationCubit(),
+  child: NavigationScreen(),
+),);
     case RoutesScreens.placeOrderScreen:
       return MaterialPageRoute(builder: (_) =>BlocProvider(create: (context) =>
-  CartCubit(GetCartProductsUseCase(getIt<CartRepositoryImpl>()))..getCartProducts(),
+  CartCubit(getCartProductsUseCase:  GetCartProductsUseCase(getIt<CartRepositoryImpl>()),
+   updateCartItemUseCase:  UpdateCartItemUseCase(getIt<CartRepositoryImpl>()),
+      removeItemUseCase:  RemoveItemUseCase(getIt<CartRepositoryImpl>()))..getCartProducts(),
   child: PlaceOrderScreen(),));
     case RoutesScreens.searchScreen:
       return MaterialPageRoute(builder: (_) => BlocProvider(
           create: (context) => HomeCubit(
             getIt<HomeRepository>(),
-         //   searchUseCase: SearchUseCase(getIt<HomeRepository>()),
           ),
           child: SearchScreen()),);
     case RoutesScreens.bookDetailScreen:
       final book = route.arguments as BookModel;
-      return MaterialPageRoute(builder: (_) => BookDetailsScreen(bookModel: book,),);
+      return MaterialPageRoute(builder: (_) => BlocProvider(
+  create: (context) => HomeCubit(getIt<HomeRepository>()),
+  child: BookDetailsScreen(bookModel: book,),
+),);
     default :
       return null;
   }

@@ -9,12 +9,14 @@ import 'package:book_store/feature/cart/presentation/widget/cart_product_list.da
 import 'package:book_store/feature/cart/presentation/widget/cart_widget.dart';
 import 'package:book_store/feature/cart/presentation/widget/price_widget.dart';
 import 'package:book_store/feature/home/data/repository/home_repository.dart';
+import 'package:book_store/gen/translations/local_keys.g.dart';
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 import '../../../../core/dependency_injection/service_locator.dart';
-
+// API not exist
 class CartScreen extends StatelessWidget {
   const CartScreen({super.key});
 
@@ -24,14 +26,14 @@ class CartScreen extends StatelessWidget {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.center,
         children: [
-          Text("My Cart",style: AppTextStyle.headlineStyle,),
+          Text(LocaleKeys.my_cart.tr(),style: AppTextStyle.headlineStyle,),
           CartProductList(),
           Padding(padding: EdgeInsetsGeometry.symmetric(horizontal: 20.w,vertical: 15.h),
           child: Column(
             spacing: 19.h,
             children: [
               PriceWidget(),
-              AppButton(label: "Checkout",tapped: () {
+              AppButton(label: LocaleKeys.checkout.tr(),tapped: () {
                     Navigator.pushNamed(context,RoutesScreens.placeOrderScreen);
               },)
             ],

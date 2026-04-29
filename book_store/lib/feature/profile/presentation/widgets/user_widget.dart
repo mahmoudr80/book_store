@@ -1,3 +1,5 @@
+import 'package:book_store/gen/translations/local_keys.g.dart';
+import 'package:easy_localization/easy_localization.dart';
 import 'package:book_store/feature/profile/presentation/cubit/profile_cubit.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -16,6 +18,8 @@ class UserWidget extends StatelessWidget {
       child: Column(
         children: [
           BlocBuilder<ProfileCubit, ProfileState>(
+            buildWhen: (previous, current) => current is GetUserLoading ||
+                current is  GetUserSuccess || current is  GetUserFailed,
   builder: (context, state) {
     if(state is GetUserSuccess){
       return Row(
@@ -23,12 +27,22 @@ class UserWidget extends StatelessWidget {
         children: [
           CircleAvatar(radius: 45.r,
             child:state.userModel.data.image!=null? ClipRRect(borderRadius: BorderRadiusGeometry.circular(100.r),child: Image.network(state.userModel.data.image!)):null,),
-          Column(
-            children: [
-              Text(state.userModel.data.name,style: AppTextStyle.labelStyle.copyWith(fontWeight: FontWeight.bold),),
-              Text(state.userModel.data.email,style: AppTextStyle.hintStyle,),
-            ],
-          )
+          Expanded(
+            child: Column(
+              children: [
+                Text(state.userModel.data.name,style: AppTextStyle.labelStyle.copyWith(fontWeight: FontWeight.bold),),
+                Text(state.userModel.data.email,style: AppTextStyle.hintStyle,),
+              ],
+            ),
+          ),
+          IconButton(onPressed: () {
+            if(context.locale==Locale("en")){
+              context.setLocale(Locale("ar"));
+            }
+            else{
+              context.setLocale(Locale("en"));
+            }
+          }, icon:Icon(Icons.language_outlined))
         ],
       );
     }
@@ -42,8 +56,8 @@ class UserWidget extends StatelessWidget {
           ),
           Column(
             children: [
-              Text("User",style: AppTextStyle.labelStyle.copyWith(fontWeight: FontWeight.bold),),
-              Text("email",style: AppTextStyle.hintStyle,),
+              Text(LocaleKeys.user_label.tr(),style: AppTextStyle.labelStyle.copyWith(fontWeight: FontWeight.bold),),
+              Text(LocaleKeys.auth_email.tr(),style: AppTextStyle.hintStyle,),
             ],
           )
         ],
@@ -58,8 +72,8 @@ class UserWidget extends StatelessWidget {
               ),
               Column(
                 children: [
-                  Text("Anonymous",style: AppTextStyle.labelStyle.copyWith(fontWeight: FontWeight.bold),),
-                  Text("anonymous@gmail.com",style: AppTextStyle.hintStyle,),
+                  Text(LocaleKeys.anonymous.tr(),style: AppTextStyle.labelStyle.copyWith(fontWeight: FontWeight.bold),),
+                  Text(LocaleKeys.anonymous_email.tr(),style: AppTextStyle.hintStyle,),
                 ],
               )
             ],

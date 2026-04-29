@@ -18,4 +18,12 @@ final WishListRepository _repository;
     }
   }
 
+Future <void> removeFromWishlist(int id) async {
+    final response=await _repository.removeFromWishlist(id);
+    if(response){
+      emit(RemoveFromWishListSuccess());
+      getWishList();
+    }
+}
+
 }

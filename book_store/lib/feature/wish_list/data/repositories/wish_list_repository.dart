@@ -10,4 +10,8 @@ class WishListRepository {
     final response =await _datasource.getWishListProducts();
     return response;
   }
+
+  Future<bool>removeFromWishlist(int id)async{
+    return await _datasource.removeFromWishlist(id);
+  }
 }

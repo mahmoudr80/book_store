@@ -1,4 +1,5 @@
 import 'package:bloc/bloc.dart';
+import 'package:book_store/core/network/api_result.dart';
 import 'package:book_store/feature/auth/data/models/user_model.dart';
 
 import '../../data/repository/auth_repository.dart';
@@ -13,25 +14,36 @@ class AuthenticationCubit extends Cubit<AuthenticationState> {
 
 
   Future<void> login(String email,String password) async {
+    if(isClosed){return;}
     emit(state.copyWith(status: EnStatus.loading,action: EnAction.login));
-    try{
-      final AuthUserModel user = await repo.login(email, password);
-      emit(state.copyWith(status: EnStatus.success,action: EnAction.login,user: user));
-    } catch(e){
-      final message = e.toString().replaceFirst('Exception: ', '');
-      emit(state.copyWith(status: EnStatus.fail,action: EnAction.login,error: message));
-    }
-  }
-  Future<void> register(AuthUserModel newUser) async {
-    emit(state.copyWith(action: EnAction.register,status: EnStatus.loading));
-    try{
-      final user = await repo.register(newUser);
-      emit(state.copyWith(action: EnAction.register,status: EnStatus.success,user: user));
 
-    } catch(e){
-      final message = e.toString().replaceFirst('Exception: ', '');
-      emit(state.copyWith(action: EnAction.register,status: EnStatus.fail,error: message));
-    }
+      final  response = await repo.login(email, password);
+      switch(response){
+        case Success(data:final user):
+          if(isClosed){return;}
+          emit(state.copyWith(status: EnStatus.success,action: EnAction.login,user: user));
+        case Failure(errorModel:final error):
+          if(isClosed){return;}
+          emit(state.copyWith(status: EnStatus.fail,action: EnAction.login,error: error.error));
+
+      }
+
+          }
+  Future<void> register(AuthUserModel newUser) async {
+    if(isClosed){return;}
+    emit(state.copyWith(action: EnAction.register,status: EnStatus.loading));
+      final response = await repo.register(newUser);
+      switch(response){
+        case Success(data:final user):
+          if(isClosed){return;}
+          emit(state.copyWith(action: EnAction.register,status: EnStatus.success,user: user));
+        case Failure(errorModel:final error):
+          if(isClosed){return;}
+          emit(state.copyWith(action: EnAction.register,status: EnStatus.fail,error: error.error));
+      }
+
+
+
   }
 }
 

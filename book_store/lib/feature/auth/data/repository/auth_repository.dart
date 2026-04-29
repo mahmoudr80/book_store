@@ -1,6 +1,7 @@
 
 import 'dart:convert';
 
+import 'package:book_store/core/network/api_result.dart';
 import 'package:book_store/core/session/session_manager.dart';
 import 'package:book_store/feature/auth/data/datasources/auth_remote_datasource.dart';
 import 'package:book_store/feature/auth/data/models/user_model.dart';
@@ -11,17 +12,27 @@ class AuthRepository  {
  const AuthRepository(this._remoteDatasource,  this._manager);
 
 
-  Future<AuthUserModel> login(String email, String password)async {
+  Future<ApiResult<AuthUserModel>> login(String email, String password)async {
     final sessionModel = await _remoteDatasource.login({"email":email,"password":password});
-    _manager.saveSession(sessionModel.token,jsonEncode(sessionModel.user.toJson()));
-    return sessionModel.user;
+    switch (sessionModel){
+      case Success(data:final session):
+        _manager.saveSession(session.token,jsonEncode(session.user.toJson()));
+        return ApiResult.success(session.user);
+      case Failure(errorModel:final error):
+        return ApiResult.failure(error);
+    }
+
   }
 
-  Future<AuthUserModel> register(AuthUserModel newUser) async {
+  Future<ApiResult<AuthUserModel>> register(AuthUserModel newUser) async {
    final sessionModel = await _remoteDatasource.register(newUser.toJson());
-   _manager.saveSession(sessionModel.token,jsonEncode(sessionModel.user.toJson()));
-   return sessionModel.user;
+   switch(sessionModel){
+     case Success(data:final session):
+       _manager.saveSession(session.token,jsonEncode(session.user.toJson()));
+       return ApiResult.success(session.user);
+     case Failure(errorModel:final error):
+       return ApiResult.failure(error);
+   }
   }
-
 
 }

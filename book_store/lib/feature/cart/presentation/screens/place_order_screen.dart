@@ -2,6 +2,8 @@ import 'package:book_store/core/routes/routes_screens.dart';
 import 'package:book_store/core/theme/app_text_style.dart';
 import 'package:book_store/core/widgets/custom_back_button.dart';
 import 'package:book_store/feature/cart/presentation/widget/user_form.dart';
+import 'package:book_store/gen/translations/local_keys.g.dart';
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart' ;
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
@@ -46,36 +48,37 @@ class _PlaceOrderScreenState extends State<PlaceOrderScreen> {
       ),
       body: Padding(
         padding:  EdgeInsets.only(left: 16.w,right: 16.h,bottom: 25.h,top: 21.h),
-        child: Column(
-          spacing: 10.h,
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-          Text("Place Your Order",style: AppTextStyle.headlineStyle,),
-          Text("Don't worry! It occurs. Please enter the email address linked with your account.",
-            style: AppTextStyle.hintStyle,),
-            SizedBox(height: 15.h,),
-            UserForm(nameController: nameController, emailController: emailController,
-                addressController: addressController, phoneController: phoneController,
-                governorateController: governorateController, formKey: formKey),
-           Spacer()
-           , Column(
-              spacing: 19.h,
-              children: [
-                PriceWidget(),
-                AppButton(label: "Submit Order",tapped: () {
-                  if(formKey?.currentState?.validate()??false){
-                    Navigator.pushNamed(context,RoutesScreens.congratsScreen);
-                  }else
-                  {
-                    ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text("Form data incorrect",style: TextStyle(color: Colors.white),)
-                    ,backgroundColor: Colors.redAccent,shape: RoundedRectangleBorder(borderRadius: BorderRadiusGeometry.circular(100.r)),),
-                    );
-                  }
-                  
-                },)
-              ],
-            )
-          ],
+        child: SingleChildScrollView(
+          child: Column(
+            spacing: 10.h,
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+            Text(LocaleKeys.place_your_order.tr(),style: AppTextStyle.headlineStyle,),
+            Text(LocaleKeys.place_order_description.tr(),
+              style: AppTextStyle.hintStyle,),
+              SizedBox(height: 15.h,),
+              UserForm(nameController: nameController, emailController: emailController,
+                  addressController: addressController, phoneController: phoneController,
+                  governorateController: governorateController, formKey: formKey),
+              Column(
+                spacing: 19.h,
+                children: [
+                  PriceWidget(),
+                   AppButton(label: LocaleKeys.submit_order.tr(),tapped: () {
+                    if(formKey?.currentState?.validate()??false){
+                      Navigator.pushNamed(context,RoutesScreens.congratsScreen);
+                    }else
+                     {
+                      ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text(LocaleKeys.form_data_incorrect.tr(),style: TextStyle(color: Colors.white),)
+                      ,backgroundColor: Colors.redAccent,shape: RoundedRectangleBorder(borderRadius: BorderRadiusGeometry.circular(100.r)),),
+                      );
+                    }
+                    
+                  },)
+                ],
+              )
+            ],
+          ),
         ),
       ),
     );

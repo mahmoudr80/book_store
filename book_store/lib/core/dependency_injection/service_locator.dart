@@ -25,18 +25,23 @@ final getIt = GetIt.instance;
 // 1. Define your services
 // 2. Register them at app startup
 void configureDependencies(){
+  // Dio
   getIt.registerLazySingleton<Dio>(() => DioFactory.createDio(),);
+  //network
   getIt.registerLazySingleton<ApiHelper>(() => ApiHelper(getIt<Dio>()),);
+  //datasource
   getIt.registerLazySingleton<AuthRemoteDatasource>(() => AuthRemoteDatasource(getIt<ApiHelper>()),);
   getIt.registerLazySingleton<HomeRemoteDatasource>(() => HomeRemoteDatasource(getIt<ApiHelper>()),);
   getIt.registerLazySingleton<ProfileRemoteDatasource>(() => ProfileRemoteDatasource(getIt<ApiHelper>()),);
   getIt.registerLazySingleton<CartRemoteDatasource>(() => CartRemoteDatasource(getIt<ApiHelper>()),);
   getIt.registerLazySingleton<WishListRemoteDatasource>(() => WishListRemoteDatasource(getIt<ApiHelper>()),);
+  //repository
   getIt.registerLazySingleton<AuthRepository>(() => AuthRepository(getIt<AuthRemoteDatasource>(),getIt<SessionManager>()),);
   getIt.registerLazySingleton<CartRepositoryImpl>(() => CartRepositoryImpl(getIt<CartRemoteDatasource>()),);
   getIt.registerLazySingleton<HomeRepository>(() => HomeRepository(getIt<HomeRemoteDatasource>()),);
   getIt.registerLazySingleton<ProfileRepository>(() => ProfileRepository(getIt<ProfileRemoteDatasource>()),);
   getIt.registerLazySingleton<WishListRepository>(() => WishListRepository(getIt<WishListRemoteDatasource>()),);
+  //storage management
   getIt.registerLazySingleton<FlutterSecureStorage>(() => FlutterSecureStorage(),);
   getIt.registerSingletonAsync<SharedPreferences>(() async =>await SharedPreferences.getInstance(),);
   getIt.registerLazySingleton<LocalStorageService>(() =>LocalStorageService( getIt<SharedPreferences>()),);
@@ -44,5 +49,3 @@ void configureDependencies(){
   getIt.registerLazySingleton<SessionManager>(() => SessionManager(getIt<LocalStorageService>(), getIt<SecureStorageService>()));
 }
 
-// No BuildContext passing needed!
-// getIt<UserRepository>().apiClient.fetchData();

@@ -10,8 +10,11 @@ import 'package:flutter_svg/flutter_svg.dart';
 import '../../../../gen/assets.gen.dart';
 
 class CartWidget extends StatelessWidget {
-  const CartWidget({super.key, required this.cartItem});
-final CartItem cartItem;
+  const CartWidget({super.key, required this.cartItem, this.increaseByOne, this.decreasedByOne, this.removeItemTapped});
+  final CartItem cartItem;
+  final void Function()?increaseByOne;
+  final void Function()?decreasedByOne;
+  final void Function()?removeItemTapped;
   @override
   Widget build(BuildContext context) {
     return Row(
@@ -21,46 +24,70 @@ final CartItem cartItem;
         SizedBox(
           height: 118.h,
           width: 100.w,
-          child:
-          Image.network(
-             cartItem.item_product_image
-          ,fit: BoxFit.fill,),
+          child: Image.network(cartItem.item_product_image, fit: BoxFit.fill),
         ),
-        Spacer(flex: 1,),
-        Column(
-          spacing: 9.h,
-          children: [
-            Text(cartItem.item_product_name,style: AppTextStyle.labelStyle.copyWith(color: AppColor.cartTextColor,
-            fontSize: 18.sp),),
-            Text(cartItem.item_product_price,style: AppTextStyle.labelStyle.copyWith(fontSize: 16.sp),),
-SizedBox(height: 15.h,),
-            Row(
-              spacing: 15.w,
-              children: [
-    Container(
-    width: 24.w,height: 24.h,
-    decoration:  BoxDecoration(color: AppColor.addRemoveIconColor.withAlpha(90)
-    ,borderRadius: BorderRadiusGeometry.circular(6.r)),
-    child: Icon(Icons.add)
-
-    ),
-                Text(cartItem.item_product_stock.toString(),style: TextStyle(fontSize: 18.sp,fontWeight: FontWeight.w600),),
-                Container(
-                  width: 24.w,height: 24.h,
-    decoration:  BoxDecoration(color: AppColor.addRemoveIconColor.withAlpha(90)
-      ,borderRadius: BorderRadiusGeometry.circular(6.r)),
-                  child: Icon(Icons.remove)
-
+        Flexible(
+          child: Column(
+            spacing: 9.h,
+            children: [
+              Text(
+                maxLines: 2,
+                textAlign: TextAlign.center,
+                overflow: TextOverflow.ellipsis,
+                cartItem.item_product_name,
+                style: AppTextStyle.labelStyle.copyWith(
+                  color: AppColor.cartTextColor,
+                  fontSize: 18.sp,
                 ),
-              ],
-            )
-          ],
+              ),
+              Text(
+                cartItem.item_product_price,
+                style: AppTextStyle.labelStyle.copyWith(fontSize: 16.sp),
+              ),
+              SizedBox(height: 15.h),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                spacing: 15.w,
+                children: [
+                  MaterialButton(
+                    minWidth: 10.w,
+                    shape: RoundedRectangleBorder(
+                      side: BorderSide(color: Colors.black26),
+                      borderRadius: BorderRadiusGeometry.circular(6.r)),
+                    clipBehavior: Clip.antiAlias,
+                    color: AppColor.addRemoveIconColor.withAlpha(20),
+                    onPressed: increaseByOne,
+                    child: Icon(Icons.add),
+                  ),
+                  Text(
+                    cartItem.item_quantity.toString(),
+                    style: TextStyle(
+                      fontSize: 18.sp,
+                      fontWeight: FontWeight.w600,
+                    ),
+                  ),
+                  MaterialButton(clipBehavior: Clip.antiAlias,
+                    minWidth: 10.w,
+                    shape: RoundedRectangleBorder(
+                      side: BorderSide(color: Colors.black26),
+                        borderRadius: BorderRadiusGeometry.circular(6.r)),
+                    onPressed: decreasedByOne,
+                    color: AppColor.addRemoveIconColor.withAlpha(20),
+                    child: Icon(Icons.remove),
+                  ),
+                ],
+              ),
+            ],
+          ),
         ),
-        Spacer(flex: 4,),
-        IconButton(onPressed: () {
-
-        }, icon:SvgPicture.asset(Assets.icons.cancelIcon,width: 24.w,
-            height: 24.h,))
+        IconButton(
+          onPressed: removeItemTapped,
+          icon: SvgPicture.asset(
+            Assets.icons.cancelIcon,
+            width: 24.w,
+            height: 24.h,
+          ),
+        ),
       ],
     );
   }

@@ -7,6 +7,8 @@ import 'package:book_store/feature/profile/presentation/cubit/profile_cubit.dart
 import 'package:book_store/feature/profile/presentation/widgets/custom_app_bar.dart';
 import 'package:book_store/feature/profile/presentation/widgets/custom_list_tile.dart';
 import 'package:book_store/feature/profile/presentation/widgets/user_widget.dart';
+import 'package:book_store/gen/translations/local_keys.g.dart';
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -28,13 +30,14 @@ class ProfileScreen extends StatelessWidget {
        Column(
          spacing: 10.h,
          children: [
-           CustomListTile(title: "My Orders",tapped: () => Navigator.pushNamed(context, RoutesScreens.myOrderScreen) ,),
-           CustomListTile(title: "Edit Profile",tapped: () => Navigator.pushNamed(context, RoutesScreens.updateProfileScreen),),
-           CustomListTile(title: "Reset Password",
+           CustomListTile(title: LocaleKeys.my_orders.tr(),tapped: () => Navigator.pushNamed(context, RoutesScreens.myOrderScreen) ,),
+           CustomListTile(title: LocaleKeys.edit_profile.tr(),tapped: () => Navigator.pushNamed(context, RoutesScreens.updateProfileScreen),),
+           CustomListTile(title: LocaleKeys.reset_password_profile.tr(),
            tapped: () => Navigator.pushNamed(context, RoutesScreens.updatePasswordScreen),),
-           CustomListTile(title: "FAQ",),
-           CustomListTile(title: "Contact Us",),
-           CustomListTile(title: "Privacy & Terms",),
+           CustomListTile(title: LocaleKeys.faq.tr(),),
+           CustomListTile(title: LocaleKeys.contact_us.tr(),),
+           CustomListTile(title: LocaleKeys.privacy_terms.tr(),),
+
 
 
          ],

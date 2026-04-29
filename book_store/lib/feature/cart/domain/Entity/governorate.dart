@@ -1,5 +1,7 @@
 import 'package:book_store/core/theme/app_color.dart';
 import 'package:book_store/core/theme/app_text_style.dart';
+import 'package:book_store/gen/translations/local_keys.g.dart';
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
@@ -37,7 +39,7 @@ Future<int> governorateDialog(BuildContext context) async {
  int ?currentIndex= await showDialog<int?>(context: context,
    builder: (context) {
     return AlertDialog(
-      title: Text("Select Governoarate",style: AppTextStyle.labelStyle,),
+      title: Text(LocaleKeys.select_governorate.tr(),style: AppTextStyle.labelStyle,),
       content: SizedBox(
         width: double.maxFinite,
         child: ListView.separated(itemBuilder:(context, index) =>

@@ -9,4 +9,12 @@ class ProfileRepository {
   Future<UserModel>getUser() async {
     return await _datasource.getUser();
   }
+  Future<bool> updateUser(String name,String phone,String address) async
+  {
+    return await _datasource.updateUser(name, phone, address);
+  }
+  Future<bool> resetPassword(String currentPass,String newPass,String confirmPass) async
+  {
+    return await _datasource.resetPassword(currentPass, newPass, confirmPass);
+  }
 }
