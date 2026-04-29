@@ -24,7 +24,7 @@ Clear state separation for UI, loading, success, and error handling
 🔧 Tech Stack
 # Flutter & Dart
 # Cubit (Bloc)
-# vgetIt (Dependency Injection)
+# getIt (Dependency Injection)
 # REST APIs
 # Responsive UI design
 
